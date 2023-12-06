@@ -1,0 +1,52 @@
+{
+  "name": "Improve-JS-skills",
+  "version": "1.0.0",
+  "main": "assets/js/main.js",
+  "type": "module",
+  "repository": "git@github.com:msuzuna/Improve-JS-skills.git",
+  "author": "msuzuna <suzuna.matsuo@nijibox.co.jp>",
+  "license": "MIT",
+  "browserslist": [
+    "last 2 versions",
+    "> 1% in JP"
+  ],
+  "devDependencies": {
+    "autoprefixer": "^10.4.16",
+    "cpx": "^1.5.0",
+    "eslint": "^8.54.0",
+    "node-sass": "^9.0.0",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "postcss": "^8.4.31",
+    "postcss-cli": "^10.1.0",
+    "prettier": "^3.1.0",
+    "stylelint": "^15.11.0",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-recess-order": "^4.4.0",
+    "stylelint-config-standard-scss": "^11.1.0",
+    "stylelint-order": "^6.0.3",
+    "stylelint-prettier": "^4.1.0",
+    "stylelint-scss": "^5.3.1",
+    "watch": "^1.0.2"
+  },
+  "scripts": {
+    "html/plain": "cpx 'src/assets/html/**/*.html' 'dist/'",
+    "html": "npm-run-all html/*",
+    "clean/css": "rimraf dist/assets/css && mkdir -p dist/assets/css",
+    "css/sass": "node-sass src/assets/sass/style.scss -o dist/assets/css --output-style expanded",
+    "css/postcss/autoprefix": "postcss dist/assets/css/style.css -o dist/assets/css/style.css --use autoprefixer",
+    "css": "yarn run clean/css && npm-run-all -s css/sass",
+    "clean/js": "rimraf dist/assets/js && mkdir -p dist/assets/js",
+    "js/plain": "cpx 'src/assets/js/**/*.js' 'dist/assets/js/'",
+    "js": "yarn run clean/js && npm-run-all -s js/*",
+    "images/plain": "cpx 'src/assets/images/**/*' 'dist/assets/images/'",
+    "clean/images": "rimraf dist/assets/images && mkdir -p dist/assets/images",
+    "images": "yarn run clean/images && npm-run-all -s images/*",
+    "watch/html": "watch 'yarn run html' ./src/assets/html",
+    "watch/css": "watch 'yarn run css' ./src/assets/sass",
+    "watch/js": "watch 'yarn run js' ./src/assets/js",
+    "watch/images": "onchange 'src/assets/images' -e '**/*.DS_Store' -- yarn run images",
+    "watch": "npm-run-all -p watch/*",
+    "build": "yarn run html && yarn run css && yarn run js && yarn run images"
+  }
+}
