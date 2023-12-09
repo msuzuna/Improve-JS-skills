@@ -56,6 +56,28 @@ export const todoList = () => {
     taskDoingArray = hasDeadlineTaskArray.concat(noDeadlineTaskArray);
   };
 
+  const updateTaskListElement = () => {
+    while (taskListElement.firstChild) {
+      taskListElement.removeChild(taskListElement.firstChild);
+    }
+    taskDoingArray.forEach((elm) => {
+      const listItem = document.createElement("li");
+      const checkbox = document.createElement("input");
+      const label = document.createElement("label");
+      const deadline = document.createElement("span");
+      checkbox.type = "checkbox";
+      label.textContent = elm.taskName;
+      deadline.textContent =
+        elm.taskDeadline !== "none"
+          ? elm.taskDeadline.toLocaleDateString()
+          : "";
+      listItem.appendChild(checkbox);
+      listItem.appendChild(label);
+      listItem.appendChild(deadline);
+      taskListElement.appendChild(listItem);
+    });
+  };
+
   taskNameInputElement.addEventListener("input", () => {
     switchAddButtonDisabled();
   });
@@ -64,5 +86,6 @@ export const todoList = () => {
     addTaskObjTotaskDoingArray();
     resetTaskInputValue();
     changeOrderTaskDoingArray();
+    updateTaskListElement();
   });
 };
