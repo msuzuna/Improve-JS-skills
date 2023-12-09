@@ -14,7 +14,7 @@ export const todoList = () => {
   )
     return;
 
-  const taskDoingArray = [];
+  let taskDoingArray = [];
 
   const switchAddButtonDisabled = () => {
     const isInputLength = taskNameInputElement.value.length;
@@ -38,11 +38,25 @@ export const todoList = () => {
     taskDoingArray.push(taskObj);
   };
 
+  const changeOrderTaskDoingArray = () => {
+    const hasDeadlineTaskArray = taskDoingArray.filter((elm) => {
+      return elm.taskDeadline !== "none";
+    });
+    const noDeadlineTaskArray = taskDoingArray.filter((elm) => {
+      return elm.taskDeadline === "none";
+    });
+    hasDeadlineTaskArray.sort((a, b) => {
+      return a.taskDeadline > b.taskDeadline ? 1 : -1;
+    });
+    taskDoingArray = hasDeadlineTaskArray.concat(noDeadlineTaskArray);
+  };
+
   taskNameInputElement.addEventListener("input", () => {
     switchAddButtonDisabled();
   });
 
   taskAddElement.addEventListener("click", () => {
     addTaskObjTotaskDoingArray();
+    changeOrderTaskDoingArray();
   });
 };
