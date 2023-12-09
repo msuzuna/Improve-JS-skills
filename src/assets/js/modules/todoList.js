@@ -38,9 +38,10 @@ export const todoList = () => {
     taskDoingArray.push(taskObj);
   };
 
-  const resetTaskInputValue = () => {
+  const resetTaskInputStatus = () => {
     taskNameInputElement.value = "";
     taskDeadlineElement.value = "";
+    taskAddElement.disabled = true;
   };
 
   const changeOrderTaskDoingArray = () => {
@@ -84,7 +85,7 @@ export const todoList = () => {
 
   taskAddElement.addEventListener("click", () => {
     addTaskObjTotaskDoingArray();
-    resetTaskInputValue();
+    resetTaskInputStatus();
     changeOrderTaskDoingArray();
     updateTaskListElement();
   });
