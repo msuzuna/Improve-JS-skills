@@ -94,6 +94,16 @@ export const todoList = () => {
   };
 
   /**
+   * タスク入力input要素をリセットする関数
+   * @function
+   */
+  const resetTaskInputStatus = () => {
+    taskNameInputElement.value = "";
+    taskDeadlineElement.value = "";
+    taskAddElement.disabled = true;
+  };
+
+  /**
    * タスクオブジェクトを進行中タスク配列に追加する関数
    * @function
    */
@@ -108,16 +118,6 @@ export const todoList = () => {
       isCompleted: false,
     };
     taskDoingArray.push(taskObj);
-  };
-
-  /**
-   * タスク入力input要素をリセットする関数
-   * @function
-   */
-  const resetTaskInputStatus = () => {
-    taskNameInputElement.value = "";
-    taskDeadlineElement.value = "";
-    taskAddElement.disabled = true;
   };
 
   /**
