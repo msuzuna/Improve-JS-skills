@@ -121,23 +121,6 @@ export const todoList = () => {
   };
 
   /**
-   * 進行中タスク配列の順序を日付の昇降順に入れ替える関数
-   * @function
-   */
-  const changeOrderTaskDoingArray = () => {
-    const hasDeadlineTaskArray = taskDoingArray.filter((elm) => {
-      return elm.taskDeadline !== "none";
-    });
-    const noDeadlineTaskArray = taskDoingArray.filter((elm) => {
-      return elm.taskDeadline === "none";
-    });
-    hasDeadlineTaskArray.sort((a, b) => {
-      return a.taskDeadline > b.taskDeadline ? 1 : -1;
-    });
-    taskDoingArray = hasDeadlineTaskArray.concat(noDeadlineTaskArray);
-  };
-
-  /**
    * 進行中タスクリスクの表示を更新する関数
    * @function
    */
@@ -251,7 +234,6 @@ export const todoList = () => {
   taskAddElement.addEventListener("click", () => {
     addTaskObjToTaskDoingArray();
     resetTaskInputStatus();
-    changeOrderTaskDoingArray();
     updateTaskListDoingElements();
   });
 
@@ -263,7 +245,6 @@ export const todoList = () => {
 
   taskListDoneElement.addEventListener("click", (event) => {
     moveTaskFromDoneArrayToDoingArray(event);
-    changeOrderTaskDoingArray();
     updateTaskListDoingElements();
     updateTaskListDoneElements();
   });
