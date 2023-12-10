@@ -114,6 +114,23 @@ export const todoList = () => {
   };
 
   /**
+   * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
+   * @function
+   * @param {*} event
+   */
+  const switchTaskIsCompleted = (event) => {
+    const targetElement = event.target;
+    const targetElementNodeName = targetElement.nodeName;
+    if (targetElementNodeName === "INPUT") {
+      const taskName = targetElement.nextElementSibling.innerText;
+      const targetTask = taskArray.find((elm) => {
+        return elm.taskName === taskName;
+      });
+      targetTask.isCompleted = targetElement.checked;
+    }
+  };
+
+  /**
    * 進行中タスクリスクの表示を更新する関数
    * @function
    */
@@ -181,23 +198,6 @@ export const todoList = () => {
       listItem.appendChild(deadline);
       taskListDoneElement.appendChild(listItem);
     });
-  };
-
-  /**
-   * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
-   * @function
-   * @param {*} event
-   */
-  const switchTaskIsCompleted = (event) => {
-    const targetElement = event.target;
-    const targetElementNodeName = targetElement.nodeName;
-    if (targetElementNodeName === "INPUT") {
-      const taskName = targetElement.nextElementSibling.innerText;
-      const targetTask = taskArray.find((elm) => {
-        return elm.taskName === taskName;
-      });
-      targetTask.isCompleted = targetElement.checked;
-    }
   };
 
   // 初期画面のタスクを進行中タスクリストに追加
