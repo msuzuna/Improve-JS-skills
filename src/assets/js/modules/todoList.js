@@ -125,12 +125,13 @@ export const todoList = () => {
     const noDeadLineArray = taskDoingArray.filter((elm) => {
       return elm.taskDeadline === "none";
     });
-    const hasDeadLineArray = taskDoingArray.filter((elm) => {
-      return elm.taskDeadline !== "none";
-    });
-    hasDeadLineArray.sort((a, b) => {
-      return a.taskDeadline > b.taskDeadline ? 1 : -1;
-    });
+    const hasDeadLineArray = taskDoingArray
+      .filter((elm) => {
+        return elm.taskDeadline !== "none";
+      })
+      .sort((a, b) => {
+        return a.taskDeadline > b.taskDeadline ? 1 : -1;
+      });
     taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
     taskDoingArray.forEach((elm) => {
       const listItem = document.createElement("li");
