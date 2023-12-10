@@ -99,7 +99,7 @@ export const todoList = () => {
    * 進行中タスクリスクの表示を更新する関数
    * @function
    */
-  const updateTaskListElement = () => {
+  const updateTaskListDoingElements = () => {
     while (taskListDoingElement.firstChild) {
       taskListDoingElement.removeChild(taskListDoingElement.firstChild);
     }
@@ -148,6 +148,6 @@ export const todoList = () => {
     addTaskObjToTaskDoingArray();
     resetTaskInputStatus();
     changeOrderTaskDoingArray();
-    updateTaskListElement();
+    updateTaskListDoingElements();
   });
 };
