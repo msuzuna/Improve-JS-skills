@@ -163,6 +163,29 @@ export const todoList = () => {
     });
   };
 
+  /**
+   * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
+   * @function
+   * @param {*} event
+   */
+  const moveTaskFromDoingArrayToDoneArray = (event) => {
+    const targetElement = event.target;
+    const targetElementNodeName = targetElement.nodeName;
+    if (targetElementNodeName === "INPUT") {
+      const listItemElements = taskListDoingElement.children;
+      const parentElenemt = targetElement.parentNode;
+      let index = 0;
+      for (let i = 0; i < listItemElements.length; i++) {
+        if (listItemElements.item(i) === parentElenemt) {
+          index = i;
+        }
+      }
+      taskDoingArray[index].isCompleted = true;
+      taskDoneArray.unshift(taskDoingArray[index]);
+      taskDoingArray.splice(index, 1);
+    }
+  };
+
   // 初期画面のタスクを進行中タスクリストに追加
   if (taskListItemDoingElements.length > 0) {
     addTaskObjToTaskArray(taskListItemDoingElements);
@@ -180,5 +203,9 @@ export const todoList = () => {
     resetTaskInputStatus();
     changeOrderTaskDoingArray();
     updateTaskListDoingElements();
+  });
+
+  taskListDoingElement.addEventListener("click", (event) => {
+    moveTaskFromDoingArrayToDoneArray(event);
   });
 };
