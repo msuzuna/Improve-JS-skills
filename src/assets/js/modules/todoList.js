@@ -195,6 +195,29 @@ export const todoList = () => {
    * @function
    * @param {*} event
    */
+  const moveTaskFromDoneArrayToDoingArray = (event) => {
+    const targetElement = event.target;
+    const targetElementNodeName = targetElement.nodeName;
+    if (targetElementNodeName === "INPUT") {
+      const listItemElements = taskListDoneElement.children;
+      const parentElenemt = targetElement.parentNode;
+      let index = 0;
+      for (let i = 0; i < listItemElements.length; i++) {
+        if (listItemElements.item(i) === parentElenemt) {
+          index = i;
+        }
+      }
+      taskDoneArray[index].isCompleted = false;
+      taskDoingArray.unshift(taskDoneArray[index]);
+      taskDoneArray.splice(index, 1);
+    }
+  };
+
+  /**
+   * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
+   * @function
+   * @param {*} event
+   */
   const moveTaskFromDoingArrayToDoneArray = (event) => {
     const targetElement = event.target;
     const targetElementNodeName = targetElement.nodeName;
@@ -236,5 +259,9 @@ export const todoList = () => {
     moveTaskFromDoingArrayToDoneArray(event);
     updateTaskListDoingElements();
     updateTaskListDoneElements();
+  });
+
+  taskListDoneElement.addEventListener("click", (event) => {
+    moveTaskFromDoneArrayToDoingArray(event);
   });
 };
