@@ -12,7 +12,9 @@ export const todoList = () => {
   /**
    * @type {HTMLElement}
    */
-  const taskAddElement = document.querySelector('[data-input="addbutton"]');
+  const taskAddButtonElement = document.querySelector(
+    '[data-input="addbutton"]'
+  );
   /**
    * @type {HTMLElement}
    */
@@ -27,7 +29,7 @@ export const todoList = () => {
   if (
     !taskNameInputElement ||
     !taskDeadlineElement ||
-    !taskAddElement ||
+    !taskAddButtonElement ||
     !taskListDoingElement ||
     !taskListDoneElement
   )
@@ -78,9 +80,9 @@ export const todoList = () => {
   const switchAddButtonDisabled = () => {
     const isInputLength = taskNameInputElement.value.length;
     if (isInputLength) {
-      taskAddElement.disabled = false;
+      taskAddButtonElement.disabled = false;
     } else {
-      taskAddElement.disabled = true;
+      taskAddButtonElement.disabled = true;
     }
   };
 
@@ -91,7 +93,7 @@ export const todoList = () => {
   const resetTaskInputStatus = () => {
     taskNameInputElement.value = "";
     taskDeadlineElement.value = "";
-    taskAddElement.disabled = true;
+    taskAddButtonElement.disabled = true;
   };
 
   /**
@@ -210,7 +212,7 @@ export const todoList = () => {
     switchAddButtonDisabled();
   });
 
-  taskAddElement.addEventListener("click", () => {
+  taskAddButtonElement.addEventListener("click", () => {
     addTaskObjFromInputToTaskArray();
     resetTaskInputStatus();
     updateTaskListDoingElements();
