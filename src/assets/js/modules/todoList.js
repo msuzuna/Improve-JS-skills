@@ -19,12 +19,17 @@ export const todoList = () => {
   const taskListDoingElement = document.querySelector(
     '[data-taskList="doing"]'
   );
+  /**
+   * @type {HTMLElement}
+   */
+  const taskListDoneElement = document.querySelector('[data-taskList="done"]');
 
   if (
     !taskNameInputElement ||
     !taskDeadlineElement ||
     !taskAddElement ||
-    !taskListDoingElement
+    !taskListDoingElement ||
+    !taskListDoneElement
   )
     return;
 
@@ -34,9 +39,46 @@ export const todoList = () => {
   const taskListItemDoingElements = taskListDoingElement.childNodes;
 
   /**
+   * @type {NodeList}
+   */
+  const taskListItemDoneElements = taskListDoneElement.childNodes;
+
+  /**
    * @type {object[]}
    */
   let taskDoingArray = [];
+
+  /**
+   * @type {object[]}
+   */
+  let taskDoneArray = [];
+
+  /**
+   * 初期で表示されているタスクを進行中タスク配列もしくは完了後タスクに追加する関数
+   * @function
+   */
+  const addTaskObjToTaskArray = (nodeList) => {
+    nodeList.forEach((elm) => {
+      if (elm.nodeName === "LI") {
+        const isCompleted = elm.querySelector("input").checked;
+        const taskName = elm.querySelector("label").innerText;
+        const taskDeadline =
+          elm.querySelector("span").innerText !== ""
+            ? new Date(elm.querySelector("span").innerText)
+            : "none";
+        const taskObj = {
+          taskName,
+          taskDeadline,
+          isCompleted,
+        };
+        if (taskObj.isCompleted) {
+          taskDoneArray.push(taskObj);
+        } else {
+          taskDoingArray.push(taskObj);
+        }
+      }
+    });
+  };
 
   /**
    * タスク追加ボタンの活性非活性を切り替える関数
@@ -123,21 +165,10 @@ export const todoList = () => {
 
   // 初期画面のタスクを進行中タスクリストに追加
   if (taskListItemDoingElements.length > 0) {
-    taskListItemDoingElements.forEach((elm) => {
-      if (elm.nodeName === "LI") {
-        const taskName = elm.querySelector("label").innerText;
-        const taskDeadline =
-          elm.querySelector("span").innerText !== ""
-            ? new Date(elm.querySelector("span").innerText)
-            : "none";
-        const taskObj = {
-          taskName,
-          taskDeadline,
-          isCompleted: false,
-        };
-        taskDoingArray.push(taskObj);
-      }
-    });
+    addTaskObjToTaskArray(taskListItemDoingElements);
+  }
+  if (taskListItemDoneElements.length > 0) {
+    addTaskObjToTaskArray(taskListItemDoneElements);
   }
 
   taskNameInputElement.addEventListener("input", () => {
