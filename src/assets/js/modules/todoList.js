@@ -164,6 +164,33 @@ export const todoList = () => {
   };
 
   /**
+   * 完了後タスクリスクの表示を更新する関数
+   * @function
+   */
+  const updateTaskListDoneElements = () => {
+    while (taskListDoneElement.firstChild) {
+      taskListDoneElement.removeChild(taskListDoneElement.firstChild);
+    }
+    taskDoneArray.forEach((elm) => {
+      const listItem = document.createElement("li");
+      const checkbox = document.createElement("input");
+      const label = document.createElement("label");
+      const deadline = document.createElement("span");
+      checkbox.type = "checkbox";
+      checkbox.checked = true;
+      label.textContent = elm.taskName;
+      deadline.textContent =
+        elm.taskDeadline !== "none"
+          ? elm.taskDeadline.toLocaleDateString()
+          : "";
+      listItem.appendChild(checkbox);
+      listItem.appendChild(label);
+      listItem.appendChild(deadline);
+      taskListDoneElement.appendChild(listItem);
+    });
+  };
+
+  /**
    * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
    * @function
    * @param {*} event
@@ -207,5 +234,7 @@ export const todoList = () => {
 
   taskListDoingElement.addEventListener("click", (event) => {
     moveTaskFromDoingArrayToDoneArray(event);
+    updateTaskListDoingElements();
+    updateTaskListDoneElements();
   });
 };
