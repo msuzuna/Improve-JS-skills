@@ -16,20 +16,22 @@ export const todoList = () => {
   /**
    * @type {HTMLElement}
    */
-  const taskListElement = document.querySelector('[data-taskList="doing"]');
+  const taskListDoingElement = document.querySelector(
+    '[data-taskList="doing"]'
+  );
 
   if (
     !taskNameInputElement ||
     !taskDeadlineElement ||
     !taskAddElement ||
-    !taskListElement
+    !taskListDoingElement
   )
     return;
 
   /**
    * @type {NodeList}
    */
-  const taskListItemElements = taskListElement.childNodes;
+  const taskListItemElements = taskListDoingElement.childNodes;
 
   /**
    * @type {object[]}
@@ -98,8 +100,8 @@ export const todoList = () => {
    * @function
    */
   const updateTaskListElement = () => {
-    while (taskListElement.firstChild) {
-      taskListElement.removeChild(taskListElement.firstChild);
+    while (taskListDoingElement.firstChild) {
+      taskListDoingElement.removeChild(taskListDoingElement.firstChild);
     }
     taskDoingArray.forEach((elm) => {
       const listItem = document.createElement("li");
@@ -115,7 +117,7 @@ export const todoList = () => {
       listItem.appendChild(checkbox);
       listItem.appendChild(label);
       listItem.appendChild(deadline);
-      taskListElement.appendChild(listItem);
+      taskListDoingElement.appendChild(listItem);
     });
   };
 
