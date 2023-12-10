@@ -263,5 +263,8 @@ export const todoList = () => {
 
   taskListDoneElement.addEventListener("click", (event) => {
     moveTaskFromDoneArrayToDoingArray(event);
+    changeOrderTaskDoingArray();
+    updateTaskListDoingElements();
+    updateTaskListDoneElements();
   });
 };
