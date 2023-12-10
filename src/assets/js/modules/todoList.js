@@ -27,6 +27,11 @@ export const todoList = () => {
     return;
 
   /**
+   * @type {NodeList}
+   */
+  const taskListItemElements = taskListElement.childNodes;
+
+  /**
    * @type {object[]}
    */
   let taskDoingArray = [];
@@ -113,6 +118,25 @@ export const todoList = () => {
       taskListElement.appendChild(listItem);
     });
   };
+
+  // 初期画面のタスクを進行中タスクリストに追加
+  if (taskListItemElements.length > 0) {
+    taskListItemElements.forEach((elm) => {
+      if (elm.nodeName === "LI") {
+        const taskName = elm.querySelector("label").innerText;
+        const taskDeadline =
+          elm.querySelector("span").innerText !== ""
+            ? new Date(elm.querySelector("span").innerText)
+            : "none";
+        const taskObj = {
+          taskName,
+          taskDeadline,
+          isCompleted: false,
+        };
+        taskDoingArray.push(taskObj);
+      }
+    });
+  }
 
   taskNameInputElement.addEventListener("input", () => {
     switchAddButtonDisabled();
