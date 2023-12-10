@@ -46,12 +46,7 @@ export const todoList = () => {
   /**
    * @type {object[]}
    */
-  let taskDoingArray = [];
-
-  /**
-   * @type {object[]}
-   */
-  let taskDoneArray = [];
+  const taskArray = [];
 
   /**
    * 初期で表示されているタスクを進行中タスク配列もしくは完了後タスクに追加する関数
@@ -71,11 +66,7 @@ export const todoList = () => {
           taskDeadline,
           isCompleted,
         };
-        if (taskObj.isCompleted) {
-          taskDoneArray.push(taskObj);
-        } else {
-          taskDoingArray.push(taskObj);
-        }
+        taskArray.push(taskObj);
       }
     });
   };
@@ -117,7 +108,7 @@ export const todoList = () => {
       taskDeadline,
       isCompleted: false,
     };
-    taskDoingArray.push(taskObj);
+    taskArray.push(taskObj);
   };
 
   /**
@@ -128,6 +119,19 @@ export const todoList = () => {
     while (taskListDoingElement.firstChild) {
       taskListDoingElement.removeChild(taskListDoingElement.firstChild);
     }
+    let taskDoingArray = taskArray.filter((elm) => {
+      return elm.isCompleted === false;
+    });
+    const noDeadLineArray = taskDoingArray.filter((elm) => {
+      return elm.taskDeadline === "none";
+    });
+    const hasDeadLineArray = taskDoingArray.filter((elm) => {
+      return elm.taskDeadline !== "none";
+    });
+    hasDeadLineArray.sort((a, b) => {
+      return a.taskDeadline > b.taskDeadline ? 1 : -1;
+    });
+    taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
     taskDoingArray.forEach((elm) => {
       const listItem = document.createElement("li");
       const checkbox = document.createElement("input");
@@ -154,6 +158,9 @@ export const todoList = () => {
     while (taskListDoneElement.firstChild) {
       taskListDoneElement.removeChild(taskListDoneElement.firstChild);
     }
+    const taskDoneArray = taskArray.filter((elm) => {
+      return elm.isCompleted === true;
+    });
     taskDoneArray.forEach((elm) => {
       const listItem = document.createElement("li");
       const checkbox = document.createElement("input");
@@ -178,44 +185,15 @@ export const todoList = () => {
    * @function
    * @param {*} event
    */
-  const moveTaskFromDoneArrayToDoingArray = (event) => {
+  const switchTaskIsCompleted = (event) => {
     const targetElement = event.target;
     const targetElementNodeName = targetElement.nodeName;
     if (targetElementNodeName === "INPUT") {
-      const listItemElements = taskListDoneElement.children;
-      const parentElenemt = targetElement.parentNode;
-      let index = 0;
-      for (let i = 0; i < listItemElements.length; i++) {
-        if (listItemElements.item(i) === parentElenemt) {
-          index = i;
-        }
-      }
-      taskDoneArray[index].isCompleted = false;
-      taskDoingArray.unshift(taskDoneArray[index]);
-      taskDoneArray.splice(index, 1);
-    }
-  };
-
-  /**
-   * 対応中タスク配列から対応済みタスク配列へタスクを移動させる関数
-   * @function
-   * @param {*} event
-   */
-  const moveTaskFromDoingArrayToDoneArray = (event) => {
-    const targetElement = event.target;
-    const targetElementNodeName = targetElement.nodeName;
-    if (targetElementNodeName === "INPUT") {
-      const listItemElements = taskListDoingElement.children;
-      const parentElenemt = targetElement.parentNode;
-      let index = 0;
-      for (let i = 0; i < listItemElements.length; i++) {
-        if (listItemElements.item(i) === parentElenemt) {
-          index = i;
-        }
-      }
-      taskDoingArray[index].isCompleted = true;
-      taskDoneArray.unshift(taskDoingArray[index]);
-      taskDoingArray.splice(index, 1);
+      const taskName = targetElement.nextElementSibling.innerText;
+      const targetTask = taskArray.find((elm) => {
+        return elm.taskName === taskName;
+      });
+      targetTask.isCompleted = targetElement.checked;
     }
   };
 
@@ -238,13 +216,13 @@ export const todoList = () => {
   });
 
   taskListDoingElement.addEventListener("click", (event) => {
-    moveTaskFromDoingArrayToDoneArray(event);
+    switchTaskIsCompleted(event);
     updateTaskListDoingElements();
     updateTaskListDoneElements();
   });
 
   taskListDoneElement.addEventListener("click", (event) => {
-    moveTaskFromDoneArrayToDoingArray(event);
+    switchTaskIsCompleted(event);
     updateTaskListDoingElements();
     updateTaskListDoneElements();
   });
