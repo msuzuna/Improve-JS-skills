@@ -31,7 +31,7 @@ export const todoList = () => {
   /**
    * @type {NodeList}
    */
-  const taskListItemElements = taskListDoingElement.childNodes;
+  const taskListItemDoingElements = taskListDoingElement.childNodes;
 
   /**
    * @type {object[]}
@@ -122,8 +122,8 @@ export const todoList = () => {
   };
 
   // 初期画面のタスクを進行中タスクリストに追加
-  if (taskListItemElements.length > 0) {
-    taskListItemElements.forEach((elm) => {
+  if (taskListItemDoingElements.length > 0) {
+    taskListItemDoingElements.forEach((elm) => {
       if (elm.nodeName === "LI") {
         const taskName = elm.querySelector("label").innerText;
         const taskDeadline =
