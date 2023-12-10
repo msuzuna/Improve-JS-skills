@@ -98,7 +98,7 @@ export const todoList = () => {
    * タスクオブジェクトを進行中タスク配列に追加する関数
    * @function
    */
-  const addTaskObjToTaskDoingArray = () => {
+  const addTaskObjFromInputToTaskArray = () => {
     const taskName = taskNameInputElement.value;
     const taskDeadline = taskDeadlineElement.value
       ? new Date(taskDeadlineElement.value)
@@ -210,7 +210,7 @@ export const todoList = () => {
   });
 
   taskAddElement.addEventListener("click", () => {
-    addTaskObjToTaskDoingArray();
+    addTaskObjFromInputToTaskArray();
     resetTaskInputStatus();
     updateTaskListDoingElements();
   });
