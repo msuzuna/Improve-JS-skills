@@ -56,18 +56,18 @@ export const todoList = () => {
    */
   const addTaskObjToTaskArray = (nodeList) => {
     nodeList.forEach((elm) => {
-        const isCompleted = elm.querySelector("input").checked;
-        const taskName = elm.querySelector("label").innerText;
-        const taskDeadline =
-          elm.querySelector("span").innerText !== ""
-            ? new Date(elm.querySelector("span").innerText)
-            : "none";
-        const taskObj = {
-          taskName,
-          taskDeadline,
-          isCompleted,
-        };
-        taskArray.push(taskObj);
+      const isCompleted = elm.querySelector("input").checked;
+      const taskName = elm.querySelector("label").innerText;
+      const taskDeadline =
+        elm.querySelector("span").innerText !== ""
+          ? new Date(elm.querySelector("span").innerText)
+          : "none";
+      const taskObj = {
+        taskName,
+        taskDeadline,
+        isCompleted,
+      };
+      taskArray.push(taskObj);
     });
   };
 
@@ -117,15 +117,17 @@ export const todoList = () => {
    * @param {*} event
    */
   const switchTaskIsCompleted = (event) => {
-    const targetElement = event.target;
-    const targetElementNodeName = targetElement.nodeName;
-    if (targetElementNodeName === "INPUT") {
-      const taskName = targetElement.nextElementSibling.innerText;
-      const targetTask = taskArray.find((elm) => {
-        return elm.taskName === taskName;
-      });
-      targetTask.isCompleted = targetElement.checked;
-    }
+    const currentElement = event.target;
+    const targetElements = event.currentTarget.querySelectorAll("li input");
+    targetElements.forEach((targetElement) => {
+      if (targetElement === currentElement) {
+        const taskName = currentElement.nextElementSibling.innerText;
+        const targetTask = taskArray.find((taskItem) => {
+          return taskItem.taskName === taskName;
+        });
+        targetTask.isCompleted = currentElement.checked;
+      }
+    });
   };
 
   /**
