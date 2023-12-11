@@ -135,9 +135,8 @@ export const todoList = () => {
    * @function
    */
   const updateTaskListDoingElements = () => {
-    while (taskListDoingElement.firstChild) {
-      taskListDoingElement.removeChild(taskListDoingElement.firstChild);
-    }
+    taskListDoingElement.innerHTML = "";
+
     let taskDoingArray = taskArray.filter((elm) => {
       return elm.isCompleted === false;
     });
@@ -175,9 +174,8 @@ export const todoList = () => {
    * @function
    */
   const updateTaskListDoneElements = () => {
-    while (taskListDoneElement.firstChild) {
-      taskListDoneElement.removeChild(taskListDoneElement.firstChild);
-    }
+    taskListDoneElement.innerHTML = "";
+
     const taskDoneArray = taskArray.filter((elm) => {
       return elm.isCompleted === true;
     });
