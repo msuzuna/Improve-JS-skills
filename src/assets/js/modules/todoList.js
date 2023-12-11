@@ -38,12 +38,12 @@ export const todoList = () => {
   /**
    * @type {NodeList}
    */
-  const taskListItemDoingElements = taskListDoingElement.childNodes;
+  const taskListItemDoingElements = taskListDoingElement.querySelectorAll("li");
 
   /**
    * @type {NodeList}
    */
-  const taskListItemDoneElements = taskListDoneElement.childNodes;
+  const taskListItemDoneElements = taskListDoneElement.querySelectorAll("li");
 
   /**
    * @type {object[]}
@@ -56,7 +56,6 @@ export const todoList = () => {
    */
   const addTaskObjToTaskArray = (nodeList) => {
     nodeList.forEach((elm) => {
-      if (elm.nodeName === "LI") {
         const isCompleted = elm.querySelector("input").checked;
         const taskName = elm.querySelector("label").innerText;
         const taskDeadline =
@@ -69,7 +68,6 @@ export const todoList = () => {
           isCompleted,
         };
         taskArray.push(taskObj);
-      }
     });
   };
 
