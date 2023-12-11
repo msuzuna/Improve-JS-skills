@@ -91,7 +91,7 @@ export const todoList = () => {
   const resetTaskInputStatus = () => {
     taskNameInputElement.value = "";
     taskDeadlineElement.value = "";
-    taskAddButtonElement.disabled = true;
+    switchAddButtonDisabled();
   };
 
   /**
