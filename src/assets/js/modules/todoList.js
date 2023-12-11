@@ -117,15 +117,15 @@ export const todoList = () => {
    * @param {*} event
    */
   const switchTaskIsCompleted = (event) => {
-    const currentElement = event.target;
+    const { target } = event;
     const targetElements = event.currentTarget.querySelectorAll("li input");
     targetElements.forEach((targetElement) => {
-      if (targetElement === currentElement) {
-        const taskName = currentElement.nextElementSibling.innerText;
+      if (targetElement === target) {
+        const taskName = target.nextElementSibling.innerText;
         const targetTask = taskArray.find((taskItem) => {
           return taskItem.taskName === taskName;
         });
-        targetTask.isCompleted = currentElement.checked;
+        targetTask.isCompleted = target.checked;
       }
     });
   };
