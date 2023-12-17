@@ -118,10 +118,11 @@ export const todoList = () => {
    */
   const switchTaskIsCompleted = (event) => {
     const { target } = event;
-    const targetElements = event.currentTarget.querySelectorAll("li input");
+    const targetElements =
+      event.currentTarget.querySelectorAll("li label input");
     targetElements.forEach((targetElement) => {
       if (targetElement === target) {
-        const taskName = target.nextElementSibling.innerText;
+        const taskName = target.parentElement.innerText;
         const targetTask = taskArray.find((taskItem) => {
           return taskItem.taskName === taskName;
         });
@@ -162,7 +163,7 @@ export const todoList = () => {
         elm.taskDeadline !== "none"
           ? elm.taskDeadline.toLocaleDateString()
           : "";
-      listItem.appendChild(checkbox);
+      label.prepend(checkbox);
       listItem.appendChild(label);
       listItem.appendChild(deadline);
       taskListDoingElement.appendChild(listItem);
@@ -191,7 +192,7 @@ export const todoList = () => {
         elm.taskDeadline !== "none"
           ? elm.taskDeadline.toLocaleDateString()
           : "";
-      listItem.appendChild(checkbox);
+      label.prepend(checkbox);
       listItem.appendChild(label);
       listItem.appendChild(deadline);
       taskListDoneElement.appendChild(listItem);
