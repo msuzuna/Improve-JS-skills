@@ -147,7 +147,7 @@ export const todoList = () => {
       .filter((elm) => {
         return elm.taskDeadline !== "none";
       })
-      .sort((a, b) => {
+      .toSorted((a, b) => {
         return a.taskDeadline > b.taskDeadline ? 1 : -1;
       });
     taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
