@@ -132,6 +132,30 @@ export const todoList = () => {
   };
 
   /**
+   * タスクリストul要素にli要素を追加する関数
+   * @function
+   * @param {HTMLElement} listElement
+   * @param {object} arrayItem
+   */
+  const createTaskListItemElement = (listElement, arrayItem) => {
+    const listItem = document.createElement("li");
+    const checkbox = document.createElement("input");
+    const label = document.createElement("label");
+    const deadline = document.createElement("span");
+    checkbox.type = "checkbox";
+    checkbox.checked = arrayItem.isCompleted;
+    label.textContent = arrayItem.taskName;
+    deadline.textContent =
+      arrayItem.taskDeadline !== "none"
+        ? arrayItem.taskDeadline.toLocaleDateString()
+        : "";
+    label.prepend(checkbox);
+    listItem.appendChild(label);
+    listItem.appendChild(deadline);
+    listElement.appendChild(listItem);
+  };
+
+  /**
    * 進行中タスクリスクの表示を更新する関数
    * @function
    */
@@ -153,20 +177,7 @@ export const todoList = () => {
       });
     taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
     taskDoingArray.forEach((elm) => {
-      const listItem = document.createElement("li");
-      const checkbox = document.createElement("input");
-      const label = document.createElement("label");
-      const deadline = document.createElement("span");
-      checkbox.type = "checkbox";
-      label.textContent = elm.taskName;
-      deadline.textContent =
-        elm.taskDeadline !== "none"
-          ? elm.taskDeadline.toLocaleDateString()
-          : "";
-      label.prepend(checkbox);
-      listItem.appendChild(label);
-      listItem.appendChild(deadline);
-      taskListDoingElement.appendChild(listItem);
+      createTaskListItemElement(taskListDoingElement, elm);
     });
   };
 
@@ -181,21 +192,7 @@ export const todoList = () => {
       return elm.isCompleted === true;
     });
     taskDoneArray.forEach((elm) => {
-      const listItem = document.createElement("li");
-      const checkbox = document.createElement("input");
-      const label = document.createElement("label");
-      const deadline = document.createElement("span");
-      checkbox.type = "checkbox";
-      checkbox.checked = true;
-      label.textContent = elm.taskName;
-      deadline.textContent =
-        elm.taskDeadline !== "none"
-          ? elm.taskDeadline.toLocaleDateString()
-          : "";
-      label.prepend(checkbox);
-      listItem.appendChild(label);
-      listItem.appendChild(deadline);
-      taskListDoneElement.appendChild(listItem);
+      createTaskListItemElement(taskListDoneElement, elm);
     });
   };
 
