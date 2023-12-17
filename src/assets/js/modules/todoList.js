@@ -54,7 +54,7 @@ export const todoList = () => {
    * 初期で表示されているタスクを進行中タスク配列もしくは完了後タスクに追加する関数
    * @function
    */
-  const addTaskObjToTaskArray = (nodeList) => {
+  const addInitialTaskObj = (nodeList, targetArray) => {
     nodeList.forEach((elm) => {
       const isCompleted = elm.querySelector("input").checked;
       const taskName = elm.querySelector("label").innerText;
@@ -67,7 +67,7 @@ export const todoList = () => {
         taskDeadline,
         isCompleted,
       };
-      taskArray.push(taskObj);
+      targetArray.push(taskObj);
     });
   };
 
@@ -98,7 +98,7 @@ export const todoList = () => {
    * タスクオブジェクトを進行中タスク配列に追加する関数
    * @function
    */
-  const addTaskObjFromInputToTaskArray = () => {
+  const addTaskObjFromInput = (targetArray) => {
     const taskName = taskNameInputElement.value;
     const taskDeadline = taskDeadlineElement.value
       ? new Date(taskDeadlineElement.value)
@@ -108,7 +108,7 @@ export const todoList = () => {
       taskDeadline,
       isCompleted: false,
     };
-    taskArray.push(taskObj);
+    targetArray.push(taskObj);
   };
 
   /**
@@ -201,10 +201,10 @@ export const todoList = () => {
 
   // 初期画面のタスクを進行中タスクリストに追加
   if (taskListItemDoingElements.length > 0) {
-    addTaskObjToTaskArray(taskListItemDoingElements);
+    addInitialTaskObj(taskListItemDoingElements, taskArray);
   }
   if (taskListItemDoneElements.length > 0) {
-    addTaskObjToTaskArray(taskListItemDoneElements);
+    addInitialTaskObj(taskListItemDoneElements, taskArray);
   }
 
   taskNameInputElement.addEventListener("input", () => {
@@ -212,7 +212,7 @@ export const todoList = () => {
   });
 
   taskAddButtonElement.addEventListener("click", () => {
-    addTaskObjFromInputToTaskArray();
+    addTaskObjFromInput(taskArray);
     resetTaskInputStatus();
     updateTaskListDoingElements();
   });
