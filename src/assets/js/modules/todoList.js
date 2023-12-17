@@ -169,7 +169,7 @@ export const todoList = () => {
     const hasDeadLineArray = taskDoingArray
       .filter((elm) => elm.taskDeadline !== "none")
       .toSorted((a, b) => a.taskDeadline - b.taskDeadline);
-    taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
+    taskDoingArray = [...hasDeadLineArray, ...noDeadLineArray];
     taskDoingArray.forEach((elm) => {
       createTaskListItemElement(taskListDoingElement, elm);
     });
