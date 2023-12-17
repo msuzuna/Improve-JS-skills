@@ -196,6 +196,17 @@ export const todoList = () => {
     });
   };
 
+  /**
+   * Nodeの表示を更新する関数
+   * @function
+   * @param {event} クリックイベント
+   */
+  const updateNodeDisplay = (event) => {
+    switchTaskIsCompleted(event);
+    updateTaskListDoingElements();
+    updateTaskListDoneElements();
+  };
+
   // 初期画面のタスクを進行中タスクリストに追加
   if (taskListItemDoingElements.length > 0) {
     addInitialTaskObj(taskListItemDoingElements, taskArray);
@@ -215,14 +226,10 @@ export const todoList = () => {
   });
 
   taskListDoingElement.addEventListener("click", (event) => {
-    switchTaskIsCompleted(event);
-    updateTaskListDoingElements();
-    updateTaskListDoneElements();
+    updateNodeDisplay(event);
   });
 
   taskListDoneElement.addEventListener("click", (event) => {
-    switchTaskIsCompleted(event);
-    updateTaskListDoingElements();
-    updateTaskListDoneElements();
+    updateNodeDisplay(event);
   });
 };
