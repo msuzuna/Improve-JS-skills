@@ -162,19 +162,13 @@ export const todoList = () => {
   const updateTaskListDoingElements = () => {
     taskListDoingElement.innerHTML = "";
 
-    let taskDoingArray = taskArray.filter((elm) => {
-      return elm.isCompleted === false;
-    });
-    const noDeadLineArray = taskDoingArray.filter((elm) => {
-      return elm.taskDeadline === "none";
-    });
+    let taskDoingArray = taskArray.filter((elm) => elm.isCompleted === false);
+    const noDeadLineArray = taskDoingArray.filter(
+      (elm) => elm.taskDeadline === "none"
+    );
     const hasDeadLineArray = taskDoingArray
-      .filter((elm) => {
-        return elm.taskDeadline !== "none";
-      })
-      .toSorted((a, b) => {
-        return a.taskDeadline > b.taskDeadline ? 1 : -1;
-      });
+      .filter((elm) => elm.taskDeadline !== "none")
+      .toSorted((a, b) => (a.taskDeadline > b.taskDeadline ? 1 : -1));
     taskDoingArray = hasDeadLineArray.concat(noDeadLineArray);
     taskDoingArray.forEach((elm) => {
       createTaskListItemElement(taskListDoingElement, elm);
