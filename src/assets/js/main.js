@@ -1,3 +1,3 @@
-import { test } from "./modules/test.js";
+import { todoList } from "./modules/todoList.js";
 
-test();
+todoList();
