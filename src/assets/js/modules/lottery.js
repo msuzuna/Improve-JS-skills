@@ -1,16 +1,16 @@
-export const loterry = () => {
+export const lottery = () => {
   /**
    * @type {Element | null}
    */
-  const triggerButton = document.querySelector('[data-loterry="trigger"]');
+  const triggerButton = document.querySelector('[data-lottery="trigger"]');
   /**
    * @type {Element | null}
    */
-  const resultNumberArea = document.querySelector('[data-loterry="number"]');
+  const resultNumberArea = document.querySelector('[data-lottery="number"]');
   /**
    * @type {Element | null}
    */
-  const resultStringArea = document.querySelector('[data-loterry="string"]');
+  const resultStringArea = document.querySelector('[data-lottery="string"]');
 
   if (!triggerButton || !resultNumberArea || !resultStringArea) return;
 
@@ -47,7 +47,7 @@ export const loterry = () => {
   };
 
   const fetchReturnString = async (number) => {
-    const filename = number !== 5 ? "lottery.json" : "lotteryDammy.json";
+    const filename = number !== 5 ? "lottery.json" : "lotteryDummy.json";
     const response = await fetch(`../../dist/assets/json/${filename}`);
     if (response.ok) {
       const json = await response.json();
