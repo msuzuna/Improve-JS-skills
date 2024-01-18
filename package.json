@@ -39,14 +39,18 @@
     "clean/js": "rimraf dist/assets/js && mkdir -p dist/assets/js",
     "js/plain": "cpx 'src/assets/js/**/*.js' 'dist/assets/js/'",
     "js": "yarn run clean/js && npm-run-all -s js/*",
+    "json/plain": "cpx 'src/assets/json/**/*.json' 'dist/assets/json/'",
+    "clean/json": "rimraf dist/assets/json && mkdir -p dist/assets/json",
+    "json": "yarn run clean/json && npm-run-all -s json/*",
     "images/plain": "cpx 'src/assets/images/**/*' 'dist/assets/images/'",
     "clean/images": "rimraf dist/assets/images && mkdir -p dist/assets/images",
     "images": "yarn run clean/images && npm-run-all -s images/*",
     "watch/html": "watch 'yarn run html' ./src/assets/html",
     "watch/css": "watch 'yarn run css' ./src/assets/sass",
     "watch/js": "watch 'yarn run js' ./src/assets/js",
+    "watch/json": "watch 'yarn run json' ./src/assets/json",
     "watch/images": "onchange 'src/assets/images' -e '**/*.DS_Store' -- yarn run images",
     "watch": "npm-run-all -p watch/*",
-    "build": "yarn run html && yarn run css && yarn run js && yarn run images"
+    "build": "yarn run html && yarn run css && yarn run js && yarn run json && yarn run images"
   }
 }
