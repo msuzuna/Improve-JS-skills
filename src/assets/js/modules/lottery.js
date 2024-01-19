@@ -1,38 +1,68 @@
 export const lottery = () => {
   /**
+   * 抽選を開始するボタン要素
    * @type {Element | null}
    */
   const triggerButton = document.querySelector('[data-lottery="trigger"]');
   /**
+   * 抽選結果の数字を表示するための要素
    * @type {Element | null}
    */
   const resultNumberArea = document.querySelector('[data-lottery="number"]');
   /**
+   * 抽選結果を表示させるための要素
    * @type {Element | null}
    */
   const resultStringArea = document.querySelector('[data-lottery="string"]');
 
   if (!triggerButton || !resultNumberArea || !resultStringArea) return;
 
+  /**
+   * 通信エラー
+   */
   class FetchError extends Error {
+    /**
+     * @param {string} message エラーメッセージ
+     */
     constructor(message) {
       super(message);
       this.name = "FetchError";
     }
   }
 
+  /**
+   * 検索結果がないエラー
+   */
   class NoDataError extends Error {
+    /**
+     * @param {string} message エラーメッセージ
+     */
     constructor(message) {
       super(message);
       this.name = "NoDataError";
     }
   }
 
+  /**
+   * @function
+   * @returns {Promise<number>}
+   */
   const promiseReturnNumber = () => {
     return new Promise(function (resolve, reject) {
       setTimeout(function () {
+        /**
+         * ランダムな整数を生成する関数
+         * @function
+         * @returns {number} ランダムな整数
+         */
         const generateNumber = () => {
+          /**
+           * @type {number} 最小の整数
+           */
           const min = 1;
+          /**
+           * @type {number} 最大の整数
+           */
           const max = 5;
           return Math.floor(Math.random() * (max - min + 1) + min);
         };
@@ -46,8 +76,19 @@ export const lottery = () => {
     });
   };
 
+  /**
+   * @function
+   * @param {number} 整数パラメータ
+   * @returns {Object} json
+   */
   const fetchReturnString = async (number) => {
+    /**
+     * @type {string} ファイル名
+     */
     const filename = number !== 5 ? "lottery.json" : "lotteryDummy.json";
+    /**
+     * @type {Object} responseオブジェクト
+     */
     const response = await fetch(`../../dist/assets/json/${filename}`);
     if (response.ok) {
       const json = await response.json();
@@ -57,17 +98,33 @@ export const lottery = () => {
     }
   };
 
-  // くじの抽選結果を返す関数
+  /**
+   * くじの抽選結果を返す関数
+   * @async
+   * @function
+   */
   const getLotteryResult = async () => {
     try {
+      /**
+       * @type {number} ランダムな整数
+       */
       const resultNumber = await promiseReturnNumber();
       resultNumberArea.innerHTML = await resultNumber;
+
+      /**
+       * @type {Object} json
+       */
       const resultJson = await fetchReturnString(resultNumber);
       if (resultJson[resultNumber] === undefined) {
         throw new NoDataError("no data error");
       }
       resultStringArea.innerHTML = await resultJson[resultNumber];
     } catch (e) {
+      /**
+       * エラーの種類に応じて適切なエラー文言を取得する関数
+       * @param {Object} エラーオブジェクト
+       * @returns {string} ユーザーに提示するエラー文言
+       */
       const getErrorMessage = (e) => {
         if (e instanceof FetchError) {
           return "通信が失敗しました。";
@@ -77,6 +134,9 @@ export const lottery = () => {
           return "予期しないエラーが発生しました。";
         }
       };
+      /**
+       * @type {string} ユーザーに提示するエラー文言
+       */
       const errorMessage = await getErrorMessage(e);
       resultStringArea.innerHTML = await errorMessage;
     } finally {
