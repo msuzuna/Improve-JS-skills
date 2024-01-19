@@ -89,7 +89,7 @@ export const lottery = () => {
     /**
      * @type {Object} responseオブジェクト
      */
-    const response = await fetch(`../../dist/assets/json/${filename}`);
+    const response = await fetch(`../../assets/json/${filename}`);
     if (response.ok) {
       const json = await response.json();
       return json;
