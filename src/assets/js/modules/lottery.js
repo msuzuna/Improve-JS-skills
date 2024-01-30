@@ -77,6 +77,7 @@ export const lottery = () => {
   };
 
   /**
+   * @async
    * @function
    * @param {number} 整数パラメータ
    * @returns {Object} json
