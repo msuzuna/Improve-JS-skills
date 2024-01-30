@@ -120,7 +120,7 @@ export const lottery = () => {
       if (resultJson[resultNumber] === undefined) {
         throw new NoDataError("no data error");
       }
-      resultStringArea.innerHTML = await resultJson[resultNumber];
+      resultStringArea.innerHTML = resultJson[resultNumber];
     } catch (e) {
       /**
        * エラーの種類に応じて適切なエラー文言を取得する関数
@@ -140,7 +140,7 @@ export const lottery = () => {
        * @type {string} ユーザーに提示するエラー文言
        */
       const errorMessage = await getErrorMessage(e);
-      resultStringArea.innerHTML = await errorMessage;
+      resultStringArea.innerHTML = errorMessage;
     }
   };
 
