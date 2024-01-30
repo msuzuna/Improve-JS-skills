@@ -80,7 +80,8 @@ export const lottery = () => {
    * @async
    * @function
    * @param {number} 整数パラメータ
-   * @returns {Object} json
+   * @returns {Promise<any>} Promiseオブジェクトはjsonデータを表す
+   * @throws {FetchError} 通信エラー
    */
   const fetchReturnString = async (number) => {
     /**
@@ -103,6 +104,7 @@ export const lottery = () => {
    * くじの抽選結果を返す関数
    * @async
    * @function
+   * @throws {NoDataError} No Data エラー
    */
   const getLotteryResult = async () => {
     try {
