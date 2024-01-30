@@ -83,7 +83,7 @@ export const lottery = () => {
    * @returns {Promise<any>} Promiseオブジェクトはjsonデータを表す
    * @throws {FetchError} 通信エラー
    */
-  const fetchReturnString = async (number) => {
+  const fetchNumberLottoMap = async (number) => {
     /**
      * @type {string} ファイル名
      */
@@ -116,7 +116,7 @@ export const lottery = () => {
       /**
        * @type {Object} json
        */
-      const resultJson = await fetchReturnString(resultNumber);
+      const resultJson = await fetchNumberLottoMap(resultNumber);
       if (resultJson[resultNumber] === undefined) {
         throw new NoDataError("no data error");
       }
