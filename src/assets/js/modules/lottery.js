@@ -100,12 +100,12 @@ export const lottery = () => {
   };
 
   /**
-   * くじの抽選結果を返す関数
+   * くじの抽選結果を表示させる関数
    * @async
    * @function
    * @throws {NoDataError} No Data エラー
    */
-  const getLotteryResult = async () => {
+  const displayLotteryResult = async () => {
     try {
       /**
        * @type {number} ランダムな整数
@@ -146,6 +146,6 @@ export const lottery = () => {
 
   // ボタンをクリックしたら抽選が始まる
   triggerButton.addEventListener("click", () => {
-    getLotteryResult();
+    displayLotteryResult();
   });
 };
