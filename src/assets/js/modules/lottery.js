@@ -142,8 +142,6 @@ export const lottery = () => {
        */
       const errorMessage = await getErrorMessage(e);
       resultStringArea.innerHTML = await errorMessage;
-    } finally {
-      console.log("end");
     }
   };
 
