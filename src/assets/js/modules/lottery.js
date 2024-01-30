@@ -95,6 +95,9 @@ export const lottery = () => {
     if (!response.ok) {
       throw new FetchError("fetch error");
     }
+    /**
+     * @type {Object.<number, string>}
+     */
     const json = await response.json();
     return json;
   };
