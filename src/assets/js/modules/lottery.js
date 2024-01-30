@@ -79,7 +79,7 @@ export const lottery = () => {
   /**
    * @async
    * @function
-   * @param {number} 整数パラメータ
+   * @param {number} number 整数パラメータ
    * @returns {Promise<any>} Promiseオブジェクトはjsonデータを表す
    * @throws {FetchError} 通信エラー
    */
@@ -124,7 +124,8 @@ export const lottery = () => {
     } catch (e) {
       /**
        * エラーの種類に応じて適切なエラー文言を取得する関数
-       * @param {Object} エラーオブジェクト
+       * @function
+       * @param {Object} e エラーオブジェクト
        * @returns {string} ユーザーに提示するエラー文言
        */
       const getErrorMessage = (e) => {
