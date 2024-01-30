@@ -89,7 +89,7 @@ export const lottery = () => {
      */
     const filename = number !== 5 ? "lottery.json" : "lotteryDummy.json";
     /**
-     * @type {Object} responseオブジェクト
+     * @type {Response} responseオブジェクト
      */
     const response = await fetch(`../../assets/json/${filename}`);
     if (response.ok) {
