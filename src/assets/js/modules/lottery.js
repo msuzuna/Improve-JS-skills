@@ -111,7 +111,7 @@ export const lottery = () => {
        * @type {number} ランダムな整数
        */
       const resultNumber = await promiseReturnNumber();
-      resultNumberArea.innerHTML = await resultNumber;
+      resultNumberArea.innerHTML = resultNumber.toString();
 
       /**
        * @type {Object} json
