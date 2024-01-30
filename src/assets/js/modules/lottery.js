@@ -117,7 +117,7 @@ export const lottery = () => {
        * @type {Object} json
        */
       const resultJson = await fetchNumberLottoMap(resultNumber);
-      if (resultJson[resultNumber] === undefined) {
+      if (typeof resultJson[resultNumber] === "undefined") {
         throw new NoDataError("no data error");
       }
       resultStringArea.innerHTML = resultJson[resultNumber];
