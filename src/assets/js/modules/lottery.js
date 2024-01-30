@@ -117,13 +117,13 @@ export const lottery = () => {
       resultNumberArea.innerHTML = resultNumber.toString();
 
       /**
-       * @type {Object} json
+       * @type {Object.<number, string>} マップデータ
        */
-      const resultJson = await fetchNumberLottoMap(resultNumber);
-      if (typeof resultJson[resultNumber] === "undefined") {
+      const numberLottoMap = await fetchNumberLottoMap(resultNumber);
+      if (typeof numberLottoMap[resultNumber] === "undefined") {
         throw new NoDataError("no data error");
       }
-      resultStringArea.innerHTML = resultJson[resultNumber];
+      resultStringArea.innerHTML = numberLottoMap[resultNumber];
     } catch (e) {
       /**
        * エラーの種類に応じて適切なエラー文言を取得する関数
