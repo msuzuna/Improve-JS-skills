@@ -103,23 +103,22 @@ export const growEievui = () => {
   };
 
   /**
-   * @function ゲーム画面を作成する関数
+   * @function statusBlockElementを作成する関数
    * @param {obj} eeveelutionObj
    * @param {number} index
-   * @returns {void}
+   * @returns {HTMLDivElement}
    */
-  const createScreen = (eeveelutionObj, toolObj, index) => {
+  const createStatusBlockElement = (eeveelutionObj, index) => {
     const { nameText, levelText, giveName } = getDisplayText(eeveelutionObj);
-    const screen = document.createElement("div");
-    screen.dataset.eievuiScreen = index;
-
-    const nameDisplayElement = document.createElement("p");
-    nameDisplayElement.innerHTML = nameText;
-    nameDisplayElement.dataset.eievuiName = index;
+    const statusBlockElement = document.createElement("div");
 
     const descriptionDisplayElement = document.createElement("p");
     descriptionDisplayElement.innerHTML = giveName;
     descriptionDisplayElement.dataset.eievuiDescription = index;
+
+    const nameDisplayElement = document.createElement("p");
+    nameDisplayElement.innerHTML = nameText;
+    nameDisplayElement.dataset.eievuiName = index;
 
     const levelDisplayElement = document.createElement("p");
     levelDisplayElement.innerHTML = levelText;
@@ -129,12 +128,27 @@ export const growEievui = () => {
     imageElement.src = eeveelutionObj.imagePass;
     imageElement.dataset.eievuiImage = index;
 
-    const toolBlockElement = createToolBlockElement(toolObj);
+    statusBlockElement.appendChild(descriptionDisplayElement);
+    statusBlockElement.appendChild(nameDisplayElement);
+    statusBlockElement.appendChild(levelDisplayElement);
+    statusBlockElement.appendChild(imageElement);
 
-    screen.appendChild(descriptionDisplayElement);
-    screen.appendChild(nameDisplayElement);
-    screen.appendChild(levelDisplayElement);
-    screen.appendChild(imageElement);
+    return statusBlockElement;
+  };
+
+  /**
+   * @function ゲーム画面を作成する関数
+   * @param {obj} eeveelutionObj
+   * @param {number} index
+   * @returns {void}
+   */
+  const createScreen = (eeveelutionObj, toolObj, index) => {
+    const screen = document.createElement("div");
+    screen.dataset.eievuiScreen = index;
+
+    const statusBlockElement = createStatusBlockElement(eeveelutionObj, index);
+    const toolBlockElement = createToolBlockElement(toolObj);
+    screen.appendChild(statusBlockElement);
     screen.appendChild(toolBlockElement);
     screenBlock.appendChild(screen);
   };
