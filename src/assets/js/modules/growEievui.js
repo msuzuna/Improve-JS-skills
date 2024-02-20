@@ -17,7 +17,11 @@ export const growEievui = () => {
    * @type {HTMLButtonElement || null}
    */
   const nameButton = document.querySelector('[data-eievui-button="name"]');
+  /**
+   * @type {HTMLDivElement || null}
+   */
   const screenBlock = document.querySelector('[data-eievui-screen="wrapper"]');
+
   if (!nameInput || !nameButton || !screenBlock) return;
 
   /**
@@ -26,7 +30,7 @@ export const growEievui = () => {
   let index = 0;
 
   /**
-   * @function
+   * @function ボタンの活性非活性を切り替える関数
    * @param {HTMLinputElement} inputElement
    * @param {HTMLButtonElement} buttonElement
    * @returns {void}
@@ -40,21 +44,46 @@ export const growEievui = () => {
     }
   };
 
+  /**
+   * @function 表示する文言を取得する関数
+   * @param {obj} eveelutionObj
+   * @returns {obj}
+   */
   const getDisplayText = (eveelutionObj) => {
-    const { name, level } = eveelutionObj;
+    const { name, breed, level } = eveelutionObj;
     const nameText = `名前：${name}`;
     const levelText = `レベル：${level}`;
-    return [nameText, levelText];
+    const giveName = `${breed}に${name}と名前をつけた！`;
+    const levelUp = `${name}はレベル${level}になった！`;
+    const friendshipLevelUp = `${name}と仲良くなった！`;
+    const textObj = {
+      nameText,
+      levelText,
+      giveName,
+      levelUp,
+      friendshipLevelUp,
+    };
+    return textObj;
   };
 
+  /**
+   * @function ゲーム画面を作成する関数
+   * @param {obj} eeveelutionObj
+   * @param {number} index
+   * @returns {void}
+   */
   const createScreen = (eeveelutionObj, index) => {
-    const [nameText, levelText] = getDisplayText(eeveelutionObj);
+    const { nameText, levelText, giveName } = getDisplayText(eeveelutionObj);
     const screen = document.createElement("div");
     screen.dataset.eievuiScreen = index;
 
     const nameDisplayElement = document.createElement("p");
     nameDisplayElement.innerHTML = nameText;
     nameDisplayElement.dataset.eievuiName = index;
+
+    const descriptionDisplayElement = document.createElement("p");
+    descriptionDisplayElement.innerHTML = giveName;
+    descriptionDisplayElement.dataset.eievuiDescription = index;
 
     const levelDisplayElement = document.createElement("p");
     levelDisplayElement.innerHTML = levelText;
@@ -64,6 +93,7 @@ export const growEievui = () => {
     imageElement.src = eeveelutionObj.imagePass;
     imageElement.dataset.eievuiImage = index;
 
+    screen.appendChild(descriptionDisplayElement);
     screen.appendChild(nameDisplayElement);
     screen.appendChild(levelDisplayElement);
     screen.appendChild(imageElement);
