@@ -1,11 +1,33 @@
 export const growEievui = () => {
+  /**
+   * @class イーブイクラス
+   */
   class Eievui {
+    /**
+     * イーブイのステータス
+     * @param {string} name
+     */
     constructor(name) {
       this.name = name;
       this.imagePass = "../../dist/assets/images/eevee_icon.png";
       this.breed = "イーブイ";
       this.level = 10;
       this.friendshipLevel = 9;
+    }
+  }
+
+  /**
+   * @class ブースタークラス
+   */
+  class Booster extends Eievui {
+    /**
+     * イーブイのステータス
+     * @param {string} name
+     */
+    constructor(name, level, friendshipLevel) {
+      super(name, level, friendshipLevel);
+      this.imagePass = "../../dist/assets/images/flareon_icon.png";
+      this.breed = "ブースター";
     }
   }
 
@@ -67,14 +89,24 @@ export const growEievui = () => {
     const giveName = `${breed}に${name}と名前をつけた！`;
     const levelUp = `${name}はレベル${level}になった！`;
     const friendshipLevelUp = `${name}と仲良くなった！`;
+    const evolve = `おめでとう！${name}は${breed}に進化した！`;
     const textObj = {
       nameText,
       levelText,
       giveName,
       levelUp,
       friendshipLevelUp,
+      evolve,
     };
     return textObj;
+  };
+
+  const createEvolvedPoke = (eeveelutionObj, usedTool) => {
+    const { name, level, friendshipLevel } = eeveelutionObj;
+    switch (usedTool) {
+      case "fire":
+        return new Booster(name, level, friendshipLevel);
+    }
   };
 
   /**
@@ -82,13 +114,14 @@ export const growEievui = () => {
    * @param {obj} toolObj
    * @returns {HTMLDivElement}
    */
-  const createToolBlockElement = (toolObj) => {
+  const createToolBlockElement = (toolObj, index) => {
     const optionArray = [];
     const toolBlockElement = document.createElement("div");
     const toolSelectElement = document.createElement("select");
     const toolButton = document.createElement("button");
     toolButton.type = "button";
     toolButton.innerHTML = "道具を使う";
+    toolButton.dataset.eievuiTool = index;
     for (let key in toolObj) {
       const option = document.createElement("option");
       option.value = key;
@@ -97,6 +130,7 @@ export const growEievui = () => {
       toolSelectElement.appendChild(option);
     }
     toolSelectElement.size = Object.keys(toolObj).length;
+    toolSelectElement.dataset.eievuiSelect = index;
     toolBlockElement.appendChild(toolSelectElement);
     toolBlockElement.appendChild(toolButton);
     return toolBlockElement;
@@ -147,7 +181,7 @@ export const growEievui = () => {
     screen.dataset.eievuiScreen = index;
 
     const statusBlockElement = createStatusBlockElement(eeveelutionObj, index);
-    const toolBlockElement = createToolBlockElement(toolObj);
+    const toolBlockElement = createToolBlockElement(toolObj, index);
     screen.appendChild(statusBlockElement);
     screen.appendChild(toolBlockElement);
     screenBlock.appendChild(screen);
@@ -162,5 +196,26 @@ export const growEievui = () => {
     const eievui = new Eievui(name);
     createScreen(eievui, toolObj, index);
     index += 1;
+
+    const toolButtons = document.querySelectorAll("[data-eievui-tool]");
+    if (toolButtons.length === 0) return;
+
+    toolButtons.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const getUsedTool = (e) => {
+          const currentIndex = Number(e.target.dataset.eievuiTool);
+          const select = document.querySelector(
+            `[data-eievui-select="${currentIndex}"]`
+          );
+          const options = select.children;
+          const selectedindex = select.selectedIndex;
+          const selectValue = options[selectedindex].value;
+          return selectValue;
+        };
+        const usedTool = getUsedTool(e);
+        const newPoke = createEvolvedPoke(eievui, usedTool);
+        console.log(newPoke);
+      });
+    });
   });
 };
