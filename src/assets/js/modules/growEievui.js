@@ -30,6 +30,17 @@ export const growEievui = () => {
   let index = 0;
 
   /**
+   * @type {obj}
+   */
+  const toolObj = {
+    fire: "ほのおのいし",
+    warter: "みずのいし",
+    thunder: "かみなりのいし",
+    grass: "リーフのいし",
+    ice: "こおりのいし",
+  };
+
+  /**
    * @function ボタンの活性非活性を切り替える関数
    * @param {HTMLinputElement} inputElement
    * @param {HTMLButtonElement} buttonElement
@@ -67,12 +78,37 @@ export const growEievui = () => {
   };
 
   /**
+   * @function toolBlockElementを作成する関数
+   * @param {obj} toolObj
+   * @returns {HTMLDivElement}
+   */
+  const createToolBlockElement = (toolObj) => {
+    const optionArray = [];
+    const toolBlockElement = document.createElement("div");
+    const toolSelectElement = document.createElement("select");
+    const toolButton = document.createElement("button");
+    toolButton.type = "button";
+    toolButton.innerHTML = "道具を使う";
+    for (let key in toolObj) {
+      const option = document.createElement("option");
+      option.value = key;
+      option.innerHTML = toolObj[key];
+      optionArray.push(option);
+      toolSelectElement.appendChild(option);
+    }
+    toolSelectElement.size = Object.keys(toolObj).length;
+    toolBlockElement.appendChild(toolSelectElement);
+    toolBlockElement.appendChild(toolButton);
+    return toolBlockElement;
+  };
+
+  /**
    * @function ゲーム画面を作成する関数
    * @param {obj} eeveelutionObj
    * @param {number} index
    * @returns {void}
    */
-  const createScreen = (eeveelutionObj, index) => {
+  const createScreen = (eeveelutionObj, toolObj, index) => {
     const { nameText, levelText, giveName } = getDisplayText(eeveelutionObj);
     const screen = document.createElement("div");
     screen.dataset.eievuiScreen = index;
@@ -93,10 +129,13 @@ export const growEievui = () => {
     imageElement.src = eeveelutionObj.imagePass;
     imageElement.dataset.eievuiImage = index;
 
+    const toolBlockElement = createToolBlockElement(toolObj);
+
     screen.appendChild(descriptionDisplayElement);
     screen.appendChild(nameDisplayElement);
     screen.appendChild(levelDisplayElement);
     screen.appendChild(imageElement);
+    screen.appendChild(toolBlockElement);
     screenBlock.appendChild(screen);
   };
 
@@ -107,7 +146,7 @@ export const growEievui = () => {
   nameButton.addEventListener("click", () => {
     const name = nameInput.value;
     const eievui = new Eievui(name);
-    createScreen(eievui, index);
+    createScreen(eievui, toolObj, index);
     index += 1;
   });
 };
