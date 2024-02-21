@@ -88,6 +88,13 @@ export const growEievui = () => {
     }
   };
 
+  const changeName = (eeveelutionObj, newPoke) => {
+    const { name, breed } = eeveelutionObj;
+    if (name === breed) {
+      newPoke.name = newPoke.breed;
+    }
+  };
+
   const battle = (pxy) => {
     pxy.level += 1;
   };
@@ -119,6 +126,7 @@ export const growEievui = () => {
           };
           const usedTool = getUsedTool(currentIndex);
           const newPoke = createEvolvedPoke(eievui, usedTool);
+          changeName(eievui, newPoke);
           deactiveToolBlock(currentIndex);
           updateScreen(currentIndex, newPoke);
         });

@@ -109,12 +109,16 @@ export const updateScreen = (currentIndex, eeveelutionObj) => {
   const descriptionElement = document.querySelector(
     `[data-eievui-description="${currentIndex}"]`
   );
+  const nameElement = document.querySelector(
+    `[data-eievui-name="${currentIndex}"]`
+  );
   const imageElement = document.querySelector(
     `[data-eievui-image="${currentIndex}"]`
   );
 
-  const { evolve } = getDisplayText(eeveelutionObj);
+  const { nameText, evolve } = getDisplayText(eeveelutionObj);
   const { imagePass } = eeveelutionObj;
   descriptionElement.innerHTML = evolve;
+  nameElement.innerHTML = nameText;
   imageElement.src = imagePass;
 };

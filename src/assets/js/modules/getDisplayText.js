@@ -10,7 +10,7 @@ export const getDisplayText = (eveelutionObj) => {
   const giveName = `${breed}に${name}と名前をつけた！`;
   const levelUp = `${name}はバトルで経験を積んだ！レベル${level}になった！`;
   const friendshipLevelUp = `${name}と仲良くなった！`;
-  const evolve = `おめでとう！${name}は${breed}に進化した！`;
+  const evolve = `おめでとう！${breed}に進化した！`;
   const textObj = {
     nameText,
     levelText,
