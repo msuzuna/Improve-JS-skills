@@ -15,11 +15,57 @@ export const toggleButtonActivate = (inputElement, buttonElement) => {
   }
 };
 
+/**
+ * @function 道具ボックスを非活性にする関数
+ * @param {number} index
+ * @returns {void}
+ */
 export const deactiveToolBlock = (index) => {
   const selectBox = document.querySelector(`[data-eievui-select="${index}"]`);
   const selectButton = document.querySelector(`[data-eievui-tool="${index}"]`);
   selectBox.disabled = true;
   selectButton.disabled = true;
+};
+
+/**
+ * @function ゲーム画面を作成する関数
+ * @param {obj} eeveelutionObj
+ * @param {number} index
+ * @returns {void}
+ */
+export const createScreen = (screenBlock, eeveelutionObj, toolObj, index) => {
+  const screen = document.createElement("div");
+  screen.dataset.eievuiScreen = index;
+
+  const statusBlockElement = createStatusBlockElement(eeveelutionObj, index);
+  const toolBlockElement = createToolBlockElement(toolObj, index);
+  screen.appendChild(statusBlockElement);
+  screen.appendChild(toolBlockElement);
+  screenBlock.appendChild(screen);
+};
+
+/**
+ * @function 進化した時の表示を変更する関数
+ * @param {number} currentIndex
+ * @param {obj} eeveelutionObj
+ * @returns {void}
+ */
+export const updateScreen = (currentIndex, eeveelutionObj) => {
+  const descriptionElement = document.querySelector(
+    `[data-eievui-description="${currentIndex}"]`
+  );
+  const nameElement = document.querySelector(
+    `[data-eievui-name="${currentIndex}"]`
+  );
+  const imageElement = document.querySelector(
+    `[data-eievui-image="${currentIndex}"]`
+  );
+
+  const { nameText, evolve } = getDisplayText(eeveelutionObj);
+  const { imagePass } = eeveelutionObj;
+  descriptionElement.innerHTML = evolve;
+  nameElement.innerHTML = nameText;
+  imageElement.src = imagePass;
 };
 
 /**
@@ -60,7 +106,7 @@ const createToolBlockElement = (toolObj, index) => {
  * @param {number} index
  * @returns {HTMLDivElement}
  */
-export const createStatusBlockElement = (eeveelutionObj, index) => {
+const createStatusBlockElement = (eeveelutionObj, index) => {
   const { nameText, levelText, giveName } = getDisplayText(eeveelutionObj);
   const statusBlockElement = document.createElement("div");
 
@@ -86,39 +132,4 @@ export const createStatusBlockElement = (eeveelutionObj, index) => {
   statusBlockElement.appendChild(imageElement);
 
   return statusBlockElement;
-};
-
-/**
- * @function ゲーム画面を作成する関数
- * @param {obj} eeveelutionObj
- * @param {number} index
- * @returns {void}
- */
-export const createScreen = (screenBlock, eeveelutionObj, toolObj, index) => {
-  const screen = document.createElement("div");
-  screen.dataset.eievuiScreen = index;
-
-  const statusBlockElement = createStatusBlockElement(eeveelutionObj, index);
-  const toolBlockElement = createToolBlockElement(toolObj, index);
-  screen.appendChild(statusBlockElement);
-  screen.appendChild(toolBlockElement);
-  screenBlock.appendChild(screen);
-};
-
-export const updateScreen = (currentIndex, eeveelutionObj) => {
-  const descriptionElement = document.querySelector(
-    `[data-eievui-description="${currentIndex}"]`
-  );
-  const nameElement = document.querySelector(
-    `[data-eievui-name="${currentIndex}"]`
-  );
-  const imageElement = document.querySelector(
-    `[data-eievui-image="${currentIndex}"]`
-  );
-
-  const { nameText, evolve } = getDisplayText(eeveelutionObj);
-  const { imagePass } = eeveelutionObj;
-  descriptionElement.innerHTML = evolve;
-  nameElement.innerHTML = nameText;
-  imageElement.src = imagePass;
 };
