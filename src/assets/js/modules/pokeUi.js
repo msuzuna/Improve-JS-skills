@@ -99,3 +99,17 @@ export const createScreen = (screenBlock, eeveelutionObj, toolObj, index) => {
   screen.appendChild(toolBlockElement);
   screenBlock.appendChild(screen);
 };
+
+export const updateScreen = (currentIndex, eeveelutionObj) => {
+  const descriptionElement = document.querySelector(
+    `[data-eievui-description="${currentIndex}"]`
+  );
+  const imageElement = document.querySelector(
+    `[data-eievui-image="${currentIndex}"]`
+  );
+
+  const { evolve } = getDisplayText(eeveelutionObj);
+  const { imagePass } = eeveelutionObj;
+  descriptionElement.innerHTML = evolve;
+  imageElement.src = imagePass;
+};

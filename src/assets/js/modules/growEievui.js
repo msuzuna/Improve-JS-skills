@@ -11,6 +11,7 @@ import {
   toggleButtonActivate,
   deactiveToolBlock,
   createScreen,
+  updateScreen,
 } from "./pokeUi.js";
 
 export const growEievui = () => {
@@ -88,8 +89,8 @@ export const growEievui = () => {
         };
         const usedTool = getUsedTool(currentIndex);
         const newPoke = createEvolvedPoke(eievui, usedTool);
-        console.log(newPoke);
         deactiveToolBlock(currentIndex);
+        updateScreen(currentIndex, newPoke);
       });
     });
   });
