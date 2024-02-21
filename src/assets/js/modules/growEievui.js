@@ -47,6 +47,9 @@ export const growEievui = () => {
     ice: "こおりのいし",
   };
 
+  /**
+   * @type {obj}
+   */
   const handler = {
     set: function (target, prop, value, reciever) {
       Reflect.set(target, prop, value, reciever);
@@ -88,6 +91,12 @@ export const growEievui = () => {
     }
   };
 
+  /**
+   * @function 名前が初期値の場合進化する時に名前を変更する関数
+   * @param {obj} eeveelutionObj
+   * @param {obj} newPoke
+   * @returns {void}
+   */
   const changeName = (eeveelutionObj, newPoke) => {
     const { name, breed } = eeveelutionObj;
     if (name === breed) {
@@ -95,6 +104,11 @@ export const growEievui = () => {
     }
   };
 
+  /**
+   * @function バトルしてレベルかアップする関数
+   * @param {obj} pxy
+   * @returns {void}
+   */
   const battle = (pxy) => {
     pxy.level += 1;
   };
