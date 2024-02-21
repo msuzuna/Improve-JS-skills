@@ -1,36 +1,13 @@
+import {
+  Eievui,
+  Booster,
+  Showers,
+  Thunders,
+  Leafia,
+  Glacia,
+} from "./pokeClass.js";
+
 export const growEievui = () => {
-  /**
-   * @class イーブイクラス
-   */
-  class Eievui {
-    /**
-     * イーブイのステータス
-     * @param {string} name
-     */
-    constructor(name) {
-      this.name = name;
-      this.imagePass = "../../dist/assets/images/eevee_icon.png";
-      this.breed = "イーブイ";
-      this.level = 10;
-      this.friendshipLevel = 9;
-    }
-  }
-
-  /**
-   * @class ブースタークラス
-   */
-  class Booster extends Eievui {
-    /**
-     * イーブイのステータス
-     * @param {string} name
-     */
-    constructor(name, level, friendshipLevel) {
-      super(name, level, friendshipLevel);
-      this.imagePass = "../../dist/assets/images/flareon_icon.png";
-      this.breed = "ブースター";
-    }
-  }
-
   /**
    * @type {HTMLInputElement || null}
    */
@@ -106,6 +83,14 @@ export const growEievui = () => {
     switch (usedTool) {
       case "fire":
         return new Booster(name, level, friendshipLevel);
+      case "warter":
+        return new Showers(name, level, friendshipLevel);
+      case "thunder":
+        return new Thunders(name, level, friendshipLevel);
+      case "grass":
+        return new Leafia(name, level, friendshipLevel);
+      case "ice":
+        return new Glacia(name, level, friendshipLevel);
     }
   };
 
