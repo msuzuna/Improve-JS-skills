@@ -1,3 +1,4 @@
+import { getDisplayText } from "./getDisplayText.js";
 import {
   Eievui,
   Booster,
@@ -46,6 +47,25 @@ export const growEievui = () => {
     ice: "こおりのいし",
   };
 
+  const handler = {
+    set: function (target, prop, value, reciever) {
+      Reflect.set(target, prop, value, reciever);
+      const { key } = target;
+      if (prop === "level") {
+        const { levelText, levelUp } = getDisplayText(target);
+        const descriptionElement = document.querySelector(
+          `[data-eievui-description="${key}"]`
+        );
+        const levelElement = document.querySelector(
+          `[data-eievui-level="${key}"]`
+        );
+        descriptionElement.innerHTML = levelUp;
+        levelElement.innerHTML = levelText;
+      }
+      return true;
+    },
+  };
+
   /**
    * @function 進化後のポケモンを生成する関数
    * @param {obj} eeveelutionObj
@@ -68,9 +88,8 @@ export const growEievui = () => {
     }
   };
 
-  const battle = (eeveelutionObj) => {
-    const { level } = eeveelutionObj;
-    eeveelutionObj.level = level + 1;
+  const battle = (pxy) => {
+    pxy.level += 1;
   };
 
   nameInput.addEventListener("input", () => {
@@ -80,6 +99,7 @@ export const growEievui = () => {
   nameButton.addEventListener("click", () => {
     const name = nameInput.value;
     const eievui = new Eievui(index, name);
+    const pxy = new Proxy(eievui, handler);
     createScreen(screenBlock, eievui, toolObj, index);
     index += 1;
 
@@ -109,7 +129,7 @@ export const growEievui = () => {
     if (battleButtons.length !== 0) {
       battleButtons.forEach((button) => {
         button.addEventListener("click", () => {
-          battle(eievui);
+          battle(pxy);
         });
       });
     }
