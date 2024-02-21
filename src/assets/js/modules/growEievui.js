@@ -46,6 +46,12 @@ export const growEievui = () => {
     ice: "こおりのいし",
   };
 
+  /**
+   * @function 進化後のポケモンを生成する関数
+   * @param {obj} eeveelutionObj
+   * @param {string} usedTool
+   * @returns
+   */
   const createEvolvedPoke = (eeveelutionObj, usedTool) => {
     const { key, name, level, friendshipLevel } = eeveelutionObj;
     switch (usedTool) {
@@ -62,6 +68,11 @@ export const growEievui = () => {
     }
   };
 
+  const battle = (eeveelutionObj) => {
+    const { level } = eeveelutionObj;
+    eeveelutionObj.level = level + 1;
+  };
+
   nameInput.addEventListener("input", () => {
     toggleButtonActivate(nameInput, nameButton);
   });
@@ -73,25 +84,34 @@ export const growEievui = () => {
     index += 1;
 
     const toolButtons = document.querySelectorAll("[data-eievui-tool]");
-    if (toolButtons.length === 0) return;
-
-    toolButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        const currentIndex = Number(e.target.dataset.eievuiTool);
-        const getUsedTool = (currentIndex) => {
-          const select = document.querySelector(
-            `[data-eievui-select="${currentIndex}"]`
-          );
-          const options = select.children;
-          const selectedindex = select.selectedIndex;
-          const selectValue = options[selectedindex].value;
-          return selectValue;
-        };
-        const usedTool = getUsedTool(currentIndex);
-        const newPoke = createEvolvedPoke(eievui, usedTool);
-        deactiveToolBlock(currentIndex);
-        updateScreen(currentIndex, newPoke);
+    if (toolButtons.length !== 0) {
+      toolButtons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const currentIndex = Number(e.target.dataset.eievuiTool);
+          const getUsedTool = (currentIndex) => {
+            const select = document.querySelector(
+              `[data-eievui-select="${currentIndex}"]`
+            );
+            const options = select.children;
+            const selectedindex = select.selectedIndex;
+            const selectValue = options[selectedindex].value;
+            return selectValue;
+          };
+          const usedTool = getUsedTool(currentIndex);
+          const newPoke = createEvolvedPoke(eievui, usedTool);
+          deactiveToolBlock(currentIndex);
+          updateScreen(currentIndex, newPoke);
+        });
       });
-    });
+    }
+
+    const battleButtons = document.querySelectorAll("[data-eievui-battle]");
+    if (battleButtons.length !== 0) {
+      battleButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          battle(eievui);
+        });
+      });
+    }
   });
 };

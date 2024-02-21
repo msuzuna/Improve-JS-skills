@@ -35,6 +35,10 @@ const createToolBlockElement = (toolObj, index) => {
   toolButton.type = "button";
   toolButton.innerHTML = "道具を使う";
   toolButton.dataset.eievuiTool = index;
+  const battleButton = document.createElement("button");
+  battleButton.type = "button";
+  battleButton.innerHTML = "バトルをする";
+  battleButton.dataset.eievuiBattle = index;
   for (let key in toolObj) {
     const option = document.createElement("option");
     option.value = key;
@@ -46,6 +50,7 @@ const createToolBlockElement = (toolObj, index) => {
   toolSelectElement.dataset.eievuiSelect = index;
   toolBlockElement.appendChild(toolSelectElement);
   toolBlockElement.appendChild(toolButton);
+  toolBlockElement.appendChild(battleButton);
   return toolBlockElement;
 };
 
