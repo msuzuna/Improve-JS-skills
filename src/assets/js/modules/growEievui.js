@@ -54,6 +54,15 @@ export const growEievui = () => {
     }
   };
 
+  const deactiveToolBlock = (index) => {
+    const selectBox = document.querySelector(`[data-eievui-select="${index}"]`);
+    const selectButton = document.querySelector(
+      `[data-eievui-tool="${index}"]`
+    );
+    selectBox.disabled = true;
+    selectButton.disabled = true;
+  };
+
   /**
    * @function 表示する文言を取得する関数
    * @param {obj} eveelutionObj
@@ -79,18 +88,18 @@ export const growEievui = () => {
   };
 
   const createEvolvedPoke = (eeveelutionObj, usedTool) => {
-    const { name, level, friendshipLevel } = eeveelutionObj;
+    const { key, name, level, friendshipLevel } = eeveelutionObj;
     switch (usedTool) {
       case "fire":
-        return new Booster(name, level, friendshipLevel);
+        return new Booster(key, name, level, friendshipLevel);
       case "warter":
-        return new Showers(name, level, friendshipLevel);
+        return new Showers(key, name, level, friendshipLevel);
       case "thunder":
-        return new Thunders(name, level, friendshipLevel);
+        return new Thunders(key, name, level, friendshipLevel);
       case "grass":
-        return new Leafia(name, level, friendshipLevel);
+        return new Leafia(key, name, level, friendshipLevel);
       case "ice":
-        return new Glacia(name, level, friendshipLevel);
+        return new Glacia(key, name, level, friendshipLevel);
     }
   };
 
@@ -178,7 +187,7 @@ export const growEievui = () => {
 
   nameButton.addEventListener("click", () => {
     const name = nameInput.value;
-    const eievui = new Eievui(name);
+    const eievui = new Eievui(index, name);
     createScreen(eievui, toolObj, index);
     index += 1;
 
@@ -187,8 +196,8 @@ export const growEievui = () => {
 
     toolButtons.forEach((button) => {
       button.addEventListener("click", (e) => {
-        const getUsedTool = (e) => {
-          const currentIndex = Number(e.target.dataset.eievuiTool);
+        const currentIndex = Number(e.target.dataset.eievuiTool);
+        const getUsedTool = (currentIndex) => {
           const select = document.querySelector(
             `[data-eievui-select="${currentIndex}"]`
           );
@@ -197,9 +206,10 @@ export const growEievui = () => {
           const selectValue = options[selectedindex].value;
           return selectValue;
         };
-        const usedTool = getUsedTool(e);
+        const usedTool = getUsedTool(currentIndex);
         const newPoke = createEvolvedPoke(eievui, usedTool);
         console.log(newPoke);
+        deactiveToolBlock(currentIndex);
       });
     });
   });

@@ -4,9 +4,11 @@
 export class Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
    */
-  constructor(name) {
+  constructor(key, name) {
+    this.key = key;
     this.name = name;
     this.imagePass = "../../dist/assets/images/eevee_icon.png";
     this.breed = "イーブイ";
@@ -21,10 +23,14 @@ export class Eievui {
 export class Booster extends Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
+   * @param {number} level
+   * @param {number} friendshipLevel
+   *
    */
-  constructor(name, level, friendshipLevel) {
-    super(name, level, friendshipLevel);
+  constructor(key, name, level, friendshipLevel) {
+    super(key, name, level, friendshipLevel);
     this.imagePass = "../../dist/assets/images/flareon_icon.png";
     this.breed = "ブースター";
   }
@@ -36,10 +42,13 @@ export class Booster extends Eievui {
 export class Thunders extends Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
+   * @param {number} level
+   * @param {number} friendshipLevel
    */
-  constructor(name, level, friendshipLevel) {
-    super(name, level, friendshipLevel);
+  constructor(key, name, level, friendshipLevel) {
+    super(key, name, level, friendshipLevel);
     this.imagePass = "../../dist/assets/images/jolteon_icon.png";
     this.breed = "サンダース";
   }
@@ -50,10 +59,13 @@ export class Thunders extends Eievui {
 export class Showers extends Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
+   * @param {number} level
+   * @param {number} friendshipLevel
    */
-  constructor(name, level, friendshipLevel) {
-    super(name, level, friendshipLevel);
+  constructor(key, name, level, friendshipLevel) {
+    super(key, name, level, friendshipLevel);
     this.imagePass = "../../dist/assets/images/vaporeon_icon.png";
     this.breed = "シャワーズ";
   }
@@ -64,10 +76,14 @@ export class Showers extends Eievui {
 export class Leafia extends Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
+   * @param {number} level
+   * @param {number} friendshipLevel
+   *
    */
-  constructor(name, level, friendshipLevel) {
-    super(name, level, friendshipLevel);
+  constructor(key, name, level, friendshipLevel) {
+    super(key, name, level, friendshipLevel);
     this.imagePass = "../../dist/assets/images/leafeon_icon.png";
     this.breed = "リーフィア";
   }
@@ -78,10 +94,13 @@ export class Leafia extends Eievui {
 export class Glacia extends Eievui {
   /**
    * ポケモンのステータス
+   * @param {number} key
    * @param {string} name
+   * @param {number} level
+   * @param {number} friendshipLevel
    */
-  constructor(name, level, friendshipLevel) {
-    super(name, level, friendshipLevel);
+  constructor(key, name, level, friendshipLevel) {
+    super(key, name, level, friendshipLevel);
     this.imagePass = "../../dist/assets/images/glaceon_icon.png";
     this.breed = "グレイシア";
   }
