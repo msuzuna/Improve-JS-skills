@@ -10,7 +10,7 @@ export class Eievui {
   constructor(key, name) {
     this.key = key;
     this.name = name;
-    this.imagePass = "../../dist/assets/images/eevee_icon.png";
+    this.imagePass = "./assets/images/eevee_icon.png";
     this.breed = "イーブイ";
     this.level = 10;
     this.friendshipLevel = 9;
@@ -31,7 +31,7 @@ export class Booster extends Eievui {
    */
   constructor(key, name, level, friendshipLevel) {
     super(key, name, level, friendshipLevel);
-    this.imagePass = "../../dist/assets/images/flareon_icon.png";
+    this.imagePass = "./assets/images/flareon_icon.png";
     this.breed = "ブースター";
   }
 }
@@ -49,7 +49,7 @@ export class Thunders extends Eievui {
    */
   constructor(key, name, level, friendshipLevel) {
     super(key, name, level, friendshipLevel);
-    this.imagePass = "../../dist/assets/images/jolteon_icon.png";
+    this.imagePass = "./assets/images/jolteon_icon.png";
     this.breed = "サンダース";
   }
 }
@@ -66,7 +66,7 @@ export class Showers extends Eievui {
    */
   constructor(key, name, level, friendshipLevel) {
     super(key, name, level, friendshipLevel);
-    this.imagePass = "../../dist/assets/images/vaporeon_icon.png";
+    this.imagePass = "./assets/images/vaporeon_icon.png";
     this.breed = "シャワーズ";
   }
 }
@@ -84,7 +84,7 @@ export class Leafia extends Eievui {
    */
   constructor(key, name, level, friendshipLevel) {
     super(key, name, level, friendshipLevel);
-    this.imagePass = "../../dist/assets/images/leafeon_icon.png";
+    this.imagePass = "./assets/images/leafeon_icon.png";
     this.breed = "リーフィア";
   }
 }
@@ -101,7 +101,7 @@ export class Glacia extends Eievui {
    */
   constructor(key, name, level, friendshipLevel) {
     super(key, name, level, friendshipLevel);
-    this.imagePass = "../../dist/assets/images/glaceon_icon.png";
+    this.imagePass = "./assets/images/glaceon_icon.png";
     this.breed = "グレイシア";
   }
 }
