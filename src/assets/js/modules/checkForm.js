@@ -36,6 +36,35 @@ export const checkForm = () => {
         }
       });
     });
+
+    /**
+     * @type {HTMLInputElement || null} 名字のカナinput要素
+     */
+    const familyKanaControl = document.getElementById("family-name-kana");
+    /**
+     * @type {HTMLInputElement || null} 名前のカナinput要素
+     */
+    const firstKanaControl = document.getElementById("first-name-kana");
+    /**
+     * @type {Array<HTMLInputElement || null>}
+     */
+    const kanaControls = [familyKanaControl, firstKanaControl];
+
+    kanaControls.forEach((kanaControl) => {
+      if (!kanaControl) return;
+      kanaControl.addEventListener("input", () => {
+        const errorMsg = kanaControl.nextElementSibling;
+        if (!errorMsg) return;
+        const { patternMismatch, tooLong, valid } = kanaControl.validity;
+        if (patternMismatch) {
+          errorMsg.textContent = "カナで入力してください。";
+        } else if (tooLong) {
+          errorMsg.textContent = `${kanaControl.maxLength}文字内でご記入ください。現在${kanaControl.value.length}文字です。`;
+        } else if (valid) {
+          errorMsg.textContent = "";
+        }
+      });
+    });
   };
 
   /**
