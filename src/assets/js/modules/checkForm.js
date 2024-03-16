@@ -1,5 +1,44 @@
 export const checkForm = () => {
   /**
+   * バリデーションチェックをする関数
+   * @returns {void}
+   */
+  const ckeckValidation = () => {
+    /**
+     * @type {HTMLInputElement || null} 名字のinput要素
+     */
+    const familyNameControl = document.getElementById("family-name");
+    /**
+     * @type {HTMLInputElement || null} 名前のinput要素
+     */
+    const firstNameControl = document.getElementById("first-name");
+    /**
+     * @type {Array<HTMLInputElement || null>}
+     */
+    const nameControls = [familyNameControl, firstNameControl];
+
+    nameControls.forEach((nameControl) => {
+      if (!nameControl) return;
+
+      nameControl.addEventListener("input", () => {
+        const errorMsg = nameControl.nextElementSibling;
+        if (!errorMsg) return;
+        const { patternMismatch, valueMissing, tooLong, valid } =
+          nameControl.validity;
+        if (patternMismatch) {
+          errorMsg.textContent = "日本語で入力してください。";
+        } else if (valueMissing) {
+          errorMsg.textContent = "必須項目です。";
+        } else if (tooLong) {
+          errorMsg.textContent = `${nameControl.maxLength}文字内でご記入ください。現在${nameControl.value.length}文字です。`;
+        } else if (valid) {
+          errorMsg.textContent = "";
+        }
+      });
+    });
+  };
+
+  /**
    * 送信ボタンの活性非活性を切り替える関数
    * @returns {void}
    */
@@ -59,5 +98,6 @@ export const checkForm = () => {
     });
   };
 
+  ckeckValidation();
   toggleButtonClickable();
 };

@@ -39,8 +39,8 @@ select:required + span::before {
 input:invalid + span::after,
 select:invalid + span::after {
   position: absolute;
+  top: 21px;
   right: calc(10% - 25px);
-  bottom: -3px;
   display: block;
   font-size: 20px;
   color: red;
@@ -50,8 +50,8 @@ select:invalid + span::after {
 input:valid + span::after,
 select:valid + span::after {
   position: absolute;
+  top: 24px;
   right: calc(10% - 30px);
-  bottom: -5px;
   display: block;
   font-size: 20px;
   color: green;
