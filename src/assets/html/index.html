@@ -5,10 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./assets/css/style.css" type="text/css" />
     <title>プチ成果物集</title>
+    <script type="module" src="./assets/js/main.js"></script>
   </head>
   <body>
     <h1>プチ成果物集</h1>
-    <h2>ToDoリスト</h2>
-    <script type="module" src="./assets/js/main.js"></script>
+    <section>
+      <h2>ToDoリスト</h2>
+    </section>
+    <section>
+      <h2>フォーム</h2>
+      <form action="" method="" class="form">
+        <fieldset>
+          <legend>氏名</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="family-name">名字</label>
+              <input type="text" id="family-name" name="family-name" required />
+              <span></span>
+            </li>
+            <li class="form__listItem">
+              <label for="first-name">名前</label>
+              <input type="text" id="first-name" name="family-name" required />
+              <span></span>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>連絡先</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="phone">電話番号</label>
+              <input type="tel" id="phone" name="phone" required />
+              <span></span>
+            </li>
+            <li class="form__listItem">
+              <label for="mail">メールアドレス</label>
+              <input type="email" id="mail" name="mail" required />
+              <span></span>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>住所</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="prefecure">都道府県</label>
+              <select id="prefecure" name="prefecure" required>
+                <option value="">--選択--</option>
+                <optgroup label="北海道">
+                  <option>北海道</option>
+                </optgroup>
+              </select>
+              <span></span>
+            </li>
+            <li class="form__listItem">
+              <label for="city">市区町村</label>
+              <input type="text" id="city" name="city" />
+              <span></span>
+            </li>
+            <li class="form__listItem">
+              <label for="address-number">番地</label>
+              <input type="text" id="address-number" name="address-number" />
+              <span></span>
+            </li>
+          </ul>
+        </fieldset>
+        <button>送信</button>
+      </form>
+    </section>
   </body>
 </html>
