@@ -78,8 +78,28 @@ export const checkForm = () => {
       });
     };
 
+    const checkPhone = () => {
+      const phoneControl = document.getElementById("phone");
+      phoneControl?.addEventListener("input", () => {
+        const errorMsg = phoneControl.nextElementSibling;
+        if (!errorMsg) return;
+        const { patternMismatch, valueMissing, tooShort, tooLong, valid } =
+          phoneControl.validity;
+        if (patternMismatch) {
+          errorMsg.textContent = "ハイフンなしの半角数字でご記入ください。";
+        } else if (valueMissing) {
+          errorMsg.textContent = "必須項目です。";
+        } else if (tooShort || tooLong) {
+          errorMsg.textContent = `${phoneControl.minLength}文字以上、${phoneControl.maxLength}文字内でご記入ください。現在${phoneControl.value.length}文字です。`;
+        } else if (valid) {
+          errorMsg.textContent = "";
+        }
+      });
+    };
+
     checkName();
     checkKana();
+    checkPhone();
   };
 
   /**
