@@ -5,66 +5,81 @@ export const checkForm = () => {
    */
   const ckeckValidation = () => {
     /**
-     * @type {HTMLInputElement || null} 名字のinput要素
+     * 名字・名前のバリデーションを行う関数
+     * @returns {void}
      */
-    const familyNameControl = document.getElementById("family-name");
-    /**
-     * @type {HTMLInputElement || null} 名前のinput要素
-     */
-    const firstNameControl = document.getElementById("first-name");
-    /**
-     * @type {Array<HTMLInputElement || null>}
-     */
-    const nameControls = [familyNameControl, firstNameControl];
+    const checkName = () => {
+      /**
+       * @type {HTMLInputElement || null} 名字のinput要素
+       */
+      const familyNameControl = document.getElementById("family-name");
+      /**
+       * @type {HTMLInputElement || null} 名前のinput要素
+       */
+      const firstNameControl = document.getElementById("first-name");
+      /**
+       * @type {Array<HTMLInputElement || null>}
+       */
+      const nameControls = [familyNameControl, firstNameControl];
 
-    nameControls.forEach((nameControl) => {
-      if (!nameControl) return;
+      nameControls.forEach((nameControl) => {
+        if (!nameControl) return;
 
-      nameControl.addEventListener("input", () => {
-        const errorMsg = nameControl.nextElementSibling;
-        if (!errorMsg) return;
-        const { patternMismatch, valueMissing, tooLong, valid } =
-          nameControl.validity;
-        if (patternMismatch) {
-          errorMsg.textContent = "日本語で入力してください。";
-        } else if (valueMissing) {
-          errorMsg.textContent = "必須項目です。";
-        } else if (tooLong) {
-          errorMsg.textContent = `${nameControl.maxLength}文字内でご記入ください。現在${nameControl.value.length}文字です。`;
-        } else if (valid) {
-          errorMsg.textContent = "";
-        }
+        nameControl.addEventListener("input", () => {
+          const errorMsg = nameControl.nextElementSibling;
+          if (!errorMsg) return;
+          const { patternMismatch, valueMissing, tooLong, valid } =
+            nameControl.validity;
+          if (patternMismatch) {
+            errorMsg.textContent = "日本語で入力してください。";
+          } else if (valueMissing) {
+            errorMsg.textContent = "必須項目です。";
+          } else if (tooLong) {
+            errorMsg.textContent = `${nameControl.maxLength}文字内でご記入ください。現在${nameControl.value.length}文字です。`;
+          } else if (valid) {
+            errorMsg.textContent = "";
+          }
+        });
       });
-    });
+    };
 
     /**
-     * @type {HTMLInputElement || null} 名字のカナinput要素
+     * カナ入力欄のバリデーションを行う関数
+     * @returns {void}
      */
-    const familyKanaControl = document.getElementById("family-name-kana");
-    /**
-     * @type {HTMLInputElement || null} 名前のカナinput要素
-     */
-    const firstKanaControl = document.getElementById("first-name-kana");
-    /**
-     * @type {Array<HTMLInputElement || null>}
-     */
-    const kanaControls = [familyKanaControl, firstKanaControl];
+    const checkKana = () => {
+      /**
+       * @type {HTMLInputElement || null} 名字のカナinput要素
+       */
+      const familyKanaControl = document.getElementById("family-name-kana");
+      /**
+       * @type {HTMLInputElement || null} 名前のカナinput要素
+       */
+      const firstKanaControl = document.getElementById("first-name-kana");
+      /**
+       * @type {Array<HTMLInputElement || null>}
+       */
+      const kanaControls = [familyKanaControl, firstKanaControl];
 
-    kanaControls.forEach((kanaControl) => {
-      if (!kanaControl) return;
-      kanaControl.addEventListener("input", () => {
-        const errorMsg = kanaControl.nextElementSibling;
-        if (!errorMsg) return;
-        const { patternMismatch, tooLong, valid } = kanaControl.validity;
-        if (patternMismatch) {
-          errorMsg.textContent = "カナで入力してください。";
-        } else if (tooLong) {
-          errorMsg.textContent = `${kanaControl.maxLength}文字内でご記入ください。現在${kanaControl.value.length}文字です。`;
-        } else if (valid) {
-          errorMsg.textContent = "";
-        }
+      kanaControls.forEach((kanaControl) => {
+        if (!kanaControl) return;
+        kanaControl.addEventListener("input", () => {
+          const errorMsg = kanaControl.nextElementSibling;
+          if (!errorMsg) return;
+          const { patternMismatch, tooLong, valid } = kanaControl.validity;
+          if (patternMismatch) {
+            errorMsg.textContent = "カナで入力してください。";
+          } else if (tooLong) {
+            errorMsg.textContent = `${kanaControl.maxLength}文字内でご記入ください。現在${kanaControl.value.length}文字です。`;
+          } else if (valid) {
+            errorMsg.textContent = "";
+          }
+        });
       });
-    });
+    };
+
+    checkName();
+    checkKana();
   };
 
   /**
