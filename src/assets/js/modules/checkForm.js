@@ -100,9 +100,56 @@ export const checkForm = () => {
       });
     };
 
+    /**
+     * メールアドレス入力欄のバリデーションを行う関数
+     * @returns {void}
+     */
+    const checkMail = () => {
+      /**
+       * @type {HTMLInputElement || null} メールアドレス①のinput要素
+       */
+      const mailControl1 = document.getElementById("mail1");
+      /**
+       * @type {HTMLInputElement || null} メールアドレス②のinput要素
+       */
+      const mailControl2 = document.getElementById("mail2");
+      /**
+       * @type {Array<HTMLInputElement || null>}
+       */
+      const mailControls = [mailControl1, mailControl2];
+
+      mailControls.forEach((mailControl) => {
+        if (!mailControl) return;
+        mailControl.addEventListener("input", () => {
+          const errorMsg = mailControl.nextElementSibling;
+          if (!errorMsg) return;
+          const {
+            typeMismatch,
+            patternMismatch,
+            valueMissing,
+            tooShort,
+            valid,
+          } = mailControl.validity;
+          if (patternMismatch) {
+            errorMsg.textContent = "半角英数字または記号で入力してください。";
+          } else if (typeMismatch) {
+            errorMsg.textContent = "メールアドレスの形式で入力してください";
+          } else if (valueMissing) {
+            errorMsg.textContent = "必須項目です。";
+          } else if (tooShort) {
+            const { minLength, value } = mailControl;
+            errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
+          } else if (valid) {
+            errorMsg.textContent = "";
+          }
+        });
+      });
+    };
+
     checkName();
     checkKana();
     checkPhone();
+    checkMail();
   };
 
   /**

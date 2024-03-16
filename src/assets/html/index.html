@@ -88,12 +88,26 @@
               <span></span>
             </li>
             <li class="form__listItem">
-              <label for="mail">メールアドレス</label>
+              <label for="mail1">メールアドレス①</label>
               <input
                 type="email"
-                id="mail"
-                name="mail"
+                id="mail1"
+                name="mail1"
                 required
+                minlength="5"
+                pattern="^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$"
+                data-form="input"
+              />
+              <span></span>
+            </li>
+            <li class="form__listItem">
+              <label for="mail2">メールアドレス②</label>
+              <input
+                type="email"
+                id="mail2"
+                name="mail2"
+                minlength="5"
+                pattern="^([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$"
                 data-form="input"
               />
               <span></span>
