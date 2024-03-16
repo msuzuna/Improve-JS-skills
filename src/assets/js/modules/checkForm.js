@@ -35,7 +35,8 @@ export const checkForm = () => {
           } else if (valueMissing) {
             errorMsg.textContent = "必須項目です。";
           } else if (tooLong) {
-            errorMsg.textContent = `${nameControl.maxLength}文字内でご記入ください。現在${nameControl.value.length}文字です。`;
+            const { maxLength, value } = nameControl;
+            errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
           } else if (valid) {
             errorMsg.textContent = "";
           }
@@ -70,7 +71,8 @@ export const checkForm = () => {
           if (patternMismatch) {
             errorMsg.textContent = "カナで入力してください。";
           } else if (tooLong) {
-            errorMsg.textContent = `${kanaControl.maxLength}文字内でご記入ください。現在${kanaControl.value.length}文字です。`;
+            const { maxLength, value } = kanaControl;
+            errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
           } else if (valid) {
             errorMsg.textContent = "";
           }
@@ -90,7 +92,8 @@ export const checkForm = () => {
         } else if (valueMissing) {
           errorMsg.textContent = "必須項目です。";
         } else if (tooShort || tooLong) {
-          errorMsg.textContent = `${phoneControl.minLength}文字以上、${phoneControl.maxLength}文字内でご記入ください。現在${phoneControl.value.length}文字です。`;
+          const { minLength, maxLength, value } = phoneControl;
+          errorMsg.textContent = `${minLength}文字以上、${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
         } else if (valid) {
           errorMsg.textContent = "";
         }
