@@ -146,10 +146,41 @@ export const checkForm = () => {
       });
     };
 
+    const checkAddressSelect = () => {
+      /**
+       * @type {HTMLSelectElement || null} 都道府県を選択するselect要素
+       */
+      const addressControl1 = document.getElementById("prefecure");
+      /**
+       * @type {HTMLSelectElement || null} 市区町村を選択するselect要素
+       */
+      const addressControl2 = document.getElementById("city");
+      /**
+       * @type {Array<HTMLSelectElement || null>}
+       */
+      const addressControls = [addressControl1, addressControl2];
+
+      addressControls.forEach((addressControl) => {
+        if (!addressControl) return;
+
+        addressControl.addEventListener("input", () => {
+          const errorMsg = addressControl.nextElementSibling;
+          if (!errorMsg) return;
+          const { valueMissing, valid } = addressControl.validity;
+          if (valueMissing) {
+            errorMsg.textContent = "必須項目です。";
+          } else if (valid) {
+            errorMsg.textContent = "";
+          }
+        });
+      });
+    };
+
     checkName();
     checkKana();
     checkPhone();
     checkMail();
+    checkAddressSelect();
   };
 
   /**
