@@ -5,6 +5,43 @@ export const checkForm = () => {
    */
   const ckeckValidation = () => {
     /**
+     * @type {HTMLInputElement || null} 名字のinput要素
+     */
+    const familyNameControl = document.getElementById("family-name");
+    /**
+     * @type {HTMLInputElement || null} 名前のinput要素
+     */
+    const firstNameControl = document.getElementById("first-name");
+    /**
+     * @type {HTMLInputElement || null} 名字のカナinput要素
+     */
+    const familyKanaControl = document.getElementById("family-name-kana");
+    /**
+     * @type {HTMLInputElement || null} 名前のカナinput要素
+     */
+    const firstKanaControl = document.getElementById("first-name-kana");
+    /**
+     * @type {HTMLInputElement || null} 電話番号のinput要素
+     */
+    const phoneControl = document.getElementById("phone");
+    /**
+     * @type {HTMLInputElement || null} メールアドレス①のinput要素
+     */
+    const mailControl1 = document.getElementById("mail1");
+    /**
+     * @type {HTMLInputElement || null} メールアドレス②のinput要素
+     */
+    const mailControl2 = document.getElementById("mail2");
+    /**
+     * @type {HTMLSelectElement || null} 都道府県を選択するselect要素
+     */
+    const addressControl1 = document.getElementById("prefecure");
+    /**
+     * @type {HTMLSelectElement || null} 市区町村を選択するselect要素
+     */
+    const addressControl2 = document.getElementById("city");
+
+    /**
      * エラーメッセージが格納されたオブジェクトを返す関数
      * @param {String} id フォームコントロール要素のid
      * @returns {Object} エラーメッセージが格納されたオブジェクト
@@ -53,19 +90,12 @@ export const checkForm = () => {
         }
       }
     };
+
     /**
      * 名字・名前のバリデーションを行う関数
      * @returns {void}
      */
     const checkName = () => {
-      /**
-       * @type {HTMLInputElement || null} 名字のinput要素
-       */
-      const familyNameControl = document.getElementById("family-name");
-      /**
-       * @type {HTMLInputElement || null} 名前のinput要素
-       */
-      const firstNameControl = document.getElementById("first-name");
       /**
        * @type {Array<HTMLInputElement || null>}
        */
@@ -99,14 +129,6 @@ export const checkForm = () => {
      */
     const checkKana = () => {
       /**
-       * @type {HTMLInputElement || null} 名字のカナinput要素
-       */
-      const familyKanaControl = document.getElementById("family-name-kana");
-      /**
-       * @type {HTMLInputElement || null} 名前のカナinput要素
-       */
-      const firstKanaControl = document.getElementById("first-name-kana");
-      /**
        * @type {Array<HTMLInputElement || null>}
        */
       const kanaControls = [familyKanaControl, firstKanaControl];
@@ -130,7 +152,6 @@ export const checkForm = () => {
     };
 
     const checkPhone = () => {
-      const phoneControl = document.getElementById("phone");
       phoneControl?.addEventListener("input", () => {
         const errorMsg = phoneControl.nextElementSibling;
         if (!errorMsg) return;
@@ -154,14 +175,6 @@ export const checkForm = () => {
      * @returns {void}
      */
     const checkMail = () => {
-      /**
-       * @type {HTMLInputElement || null} メールアドレス①のinput要素
-       */
-      const mailControl1 = document.getElementById("mail1");
-      /**
-       * @type {HTMLInputElement || null} メールアドレス②のinput要素
-       */
-      const mailControl2 = document.getElementById("mail2");
       /**
        * @type {Array<HTMLInputElement || null>}
        */
@@ -196,14 +209,6 @@ export const checkForm = () => {
     };
 
     const checkAddressSelect = () => {
-      /**
-       * @type {HTMLSelectElement || null} 都道府県を選択するselect要素
-       */
-      const addressControl1 = document.getElementById("prefecure");
-      /**
-       * @type {HTMLSelectElement || null} 市区町村を選択するselect要素
-       */
-      const addressControl2 = document.getElementById("city");
       /**
        * @type {Array<HTMLSelectElement || null>}
        */
