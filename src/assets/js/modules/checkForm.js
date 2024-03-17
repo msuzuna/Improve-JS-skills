@@ -42,6 +42,21 @@ export const checkForm = () => {
     const addressControl2 = document.getElementById("city");
 
     /**
+     * @type {Array<HTMLInputElement || HTMLSelectElement || null>}
+     */
+    const controlArray = [
+      familyNameControl,
+      firstNameControl,
+      familyKanaControl,
+      firstKanaControl,
+      phoneControl,
+      mailControl1,
+      mailControl2,
+      addressControl1,
+      addressControl2,
+    ];
+
+    /**
      * エラーメッセージが格納されたオブジェクトを返す関数
      * @param {String} id フォームコントロール要素のid
      * @returns {Object} エラーメッセージが格納されたオブジェクト
@@ -79,7 +94,7 @@ export const checkForm = () => {
             patternMismatchText,
           };
         }
-        case "mail": {
+        case "mail1": {
           const patternMismatchText =
             "半角英数字または記号で入力してください。";
           const typeMismatchText = "メールアドレスの形式で入力してください";
@@ -88,153 +103,53 @@ export const checkForm = () => {
             typeMismatchText,
           };
         }
+        case "mail2": {
+          const patternMismatchText =
+            "半角英数字または記号で入力してください。";
+          const typeMismatchText = "メールアドレスの形式で入力してください";
+          return {
+            patternMismatchText,
+            typeMismatchText,
+          };
+        }
+        default: {
+          return {};
+        }
       }
     };
 
-    /**
-     * 名字・名前のバリデーションを行う関数
-     * @returns {void}
-     */
-    const checkName = () => {
-      /**
-       * @type {Array<HTMLInputElement || null>}
-       */
-      const nameControls = [familyNameControl, firstNameControl];
-
-      nameControls.forEach((nameControl) => {
-        if (!nameControl) return;
-
-        nameControl.addEventListener("input", () => {
-          const errorMsg = nameControl.nextElementSibling;
-          if (!errorMsg) return;
-          const { patternMismatch, valueMissing, tooLong, valid } =
-            nameControl.validity;
-          if (patternMismatch) {
-            errorMsg.textContent = "日本語で入力してください。";
-          } else if (valueMissing) {
-            errorMsg.textContent = "必須項目です。";
-          } else if (tooLong) {
-            const { maxLength, value } = nameControl;
-            errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
-          } else if (valid) {
-            errorMsg.textContent = "";
-          }
-        });
-      });
-    };
-
-    /**
-     * カナ入力欄のバリデーションを行う関数
-     * @returns {void}
-     */
-    const checkKana = () => {
-      /**
-       * @type {Array<HTMLInputElement || null>}
-       */
-      const kanaControls = [familyKanaControl, firstKanaControl];
-
-      kanaControls.forEach((kanaControl) => {
-        if (!kanaControl) return;
-        kanaControl.addEventListener("input", () => {
-          const errorMsg = kanaControl.nextElementSibling;
-          if (!errorMsg) return;
-          const { patternMismatch, tooLong, valid } = kanaControl.validity;
-          if (patternMismatch) {
-            errorMsg.textContent = "カナで入力してください。";
-          } else if (tooLong) {
-            const { maxLength, value } = kanaControl;
-            errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
-          } else if (valid) {
-            errorMsg.textContent = "";
-          }
-        });
-      });
-    };
-
-    const checkPhone = () => {
-      phoneControl?.addEventListener("input", () => {
-        const errorMsg = phoneControl.nextElementSibling;
-        if (!errorMsg) return;
-        const { patternMismatch, valueMissing, tooShort, tooLong, valid } =
-          phoneControl.validity;
+    controlArray.forEach((control) => {
+      if (!control) return;
+      const errorMsg = control.nextElementSibling;
+      if (!errorMsg) return;
+      const { patternMismatchText, typeMismatchText } = getErrorMsg(control.id);
+      const { minLength, maxLength } = control;
+      control.addEventListener("input", () => {
+        const {
+          patternMismatch,
+          typeMismatch,
+          valueMissing,
+          tooShort,
+          tooLong,
+          valid,
+        } = control.validity;
         if (patternMismatch) {
-          errorMsg.textContent = "ハイフンなしの半角数字でご記入ください。";
+          errorMsg.textContent = patternMismatchText;
+        } else if (typeMismatch) {
+          errorMsg.textContent = typeMismatchText;
         } else if (valueMissing) {
           errorMsg.textContent = "必須項目です。";
-        } else if (tooShort || tooLong) {
-          const { minLength, maxLength, value } = phoneControl;
-          errorMsg.textContent = `${minLength}文字以上、${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
+        } else if (tooShort) {
+          const { value } = control;
+          errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
+        } else if (tooLong) {
+          const { value } = control;
+          errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
         } else if (valid) {
           errorMsg.textContent = "";
         }
       });
-    };
-
-    /**
-     * メールアドレス入力欄のバリデーションを行う関数
-     * @returns {void}
-     */
-    const checkMail = () => {
-      /**
-       * @type {Array<HTMLInputElement || null>}
-       */
-      const mailControls = [mailControl1, mailControl2];
-
-      mailControls.forEach((mailControl) => {
-        if (!mailControl) return;
-        mailControl.addEventListener("input", () => {
-          const errorMsg = mailControl.nextElementSibling;
-          if (!errorMsg) return;
-          const {
-            typeMismatch,
-            patternMismatch,
-            valueMissing,
-            tooShort,
-            valid,
-          } = mailControl.validity;
-          if (patternMismatch) {
-            errorMsg.textContent = "半角英数字または記号で入力してください。";
-          } else if (typeMismatch) {
-            errorMsg.textContent = "メールアドレスの形式で入力してください";
-          } else if (valueMissing) {
-            errorMsg.textContent = "必須項目です。";
-          } else if (tooShort) {
-            const { minLength, value } = mailControl;
-            errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
-          } else if (valid) {
-            errorMsg.textContent = "";
-          }
-        });
-      });
-    };
-
-    const checkAddressSelect = () => {
-      /**
-       * @type {Array<HTMLSelectElement || null>}
-       */
-      const addressControls = [addressControl1, addressControl2];
-
-      addressControls.forEach((addressControl) => {
-        if (!addressControl) return;
-
-        addressControl.addEventListener("input", () => {
-          const errorMsg = addressControl.nextElementSibling;
-          if (!errorMsg) return;
-          const { valueMissing, valid } = addressControl.validity;
-          if (valueMissing) {
-            errorMsg.textContent = "必須項目です。";
-          } else if (valid) {
-            errorMsg.textContent = "";
-          }
-        });
-      });
-    };
-
-    checkName();
-    checkKana();
-    checkPhone();
-    checkMail();
-    checkAddressSelect();
+    });
   };
 
   /**
