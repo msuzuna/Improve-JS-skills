@@ -5,6 +5,55 @@ export const checkForm = () => {
    */
   const ckeckValidation = () => {
     /**
+     * エラーメッセージが格納されたオブジェクトを返す関数
+     * @param {String} id フォームコントロール要素のid
+     * @returns {Object} エラーメッセージが格納されたオブジェクト
+     */
+    const getErrorMsg = (id) => {
+      switch (id) {
+        case "family-name": {
+          const patternMismatchText = "日本語で入力してください。";
+          return {
+            patternMismatchText,
+          };
+        }
+        case "first-name": {
+          const patternMismatchText = "日本語で入力してください。";
+          return {
+            patternMismatchText,
+          };
+        }
+        case "family-name-kana": {
+          const patternMismatchText = "カナで入力してください。";
+          return {
+            patternMismatchText,
+          };
+        }
+        case "first-name-kana": {
+          const patternMismatchText = "カナで入力してください。";
+          return {
+            patternMismatchText,
+          };
+        }
+        case "phone": {
+          const patternMismatchText =
+            "ハイフンなしの半角数字でご記入ください。";
+          return {
+            patternMismatchText,
+          };
+        }
+        case "mail": {
+          const patternMismatchText =
+            "半角英数字または記号で入力してください。";
+          const typeMismatchText = "メールアドレスの形式で入力してください";
+          return {
+            patternMismatchText,
+            typeMismatchText,
+          };
+        }
+      }
+    };
+    /**
      * 名字・名前のバリデーションを行う関数
      * @returns {void}
      */
