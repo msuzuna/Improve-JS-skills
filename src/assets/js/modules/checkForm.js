@@ -205,8 +205,8 @@ export const checkForm = () => {
       }
     };
 
-    formControls.forEach((htmlElement) => {
-      htmlElement.addEventListener("input", () => {
+    formControls.forEach((control) => {
+      control.addEventListener("input", () => {
         toggleButtonClickable(formControls, submitButton);
       });
     });
