@@ -23,6 +23,11 @@ select {
   width: 90%;
 }
 
+input + span,
+select + span {
+  color: red;
+}
+
 input:required + span::before,
 select:required + span::before {
   position: absolute;
