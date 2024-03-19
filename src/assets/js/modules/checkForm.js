@@ -3,7 +3,7 @@ export const checkForm = () => {
    * バリデーションチェックをする関数
    * @returns {void}
    */
-  const ckeckValidation = () => {
+  const checkValidation = () => {
     /**
      * @type {HTMLInputElement | null} 名字のinput要素
      */
@@ -212,6 +212,6 @@ export const checkForm = () => {
     });
   };
 
-  ckeckValidation();
+  checkValidation();
   toggleButtonClickable();
 };
