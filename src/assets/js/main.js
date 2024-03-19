@@ -1,4 +1,7 @@
-import { test } from "./modules/test.js";
+import { todoList } from "./modules/todoList.js";
+import { lottery } from "./modules/lottery.js";
 import { growEievui } from "./modules/growEievui.js";
-test();
+
+todoList();
+lottery();
 growEievui();
