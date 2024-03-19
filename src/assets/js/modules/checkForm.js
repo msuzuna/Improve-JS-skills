@@ -5,44 +5,44 @@ export const checkForm = () => {
    */
   const ckeckValidation = () => {
     /**
-     * @type {HTMLInputElement || null} 名字のinput要素
+     * @type {HTMLInputElement | null} 名字のinput要素
      */
     const familyNameControl = document.getElementById("family-name");
     /**
-     * @type {HTMLInputElement || null} 名前のinput要素
+     * @type {HTMLInputElement | null} 名前のinput要素
      */
     const firstNameControl = document.getElementById("first-name");
     /**
-     * @type {HTMLInputElement || null} 名字のカナinput要素
+     * @type {HTMLInputElement | null} 名字のカナinput要素
      */
     const familyKanaControl = document.getElementById("family-name-kana");
     /**
-     * @type {HTMLInputElement || null} 名前のカナinput要素
+     * @type {HTMLInputElement | null} 名前のカナinput要素
      */
     const firstKanaControl = document.getElementById("first-name-kana");
     /**
-     * @type {HTMLInputElement || null} 電話番号のinput要素
+     * @type {HTMLInputElement |null} 電話番号のinput要素
      */
     const phoneControl = document.getElementById("phone");
     /**
-     * @type {HTMLInputElement || null} メールアドレス①のinput要素
+     * @type {HTMLInputElement | null} メールアドレス①のinput要素
      */
     const mailControl1 = document.getElementById("mail1");
     /**
-     * @type {HTMLInputElement || null} メールアドレス②のinput要素
+     * @type {HTMLInputElement | null} メールアドレス②のinput要素
      */
     const mailControl2 = document.getElementById("mail2");
     /**
-     * @type {HTMLSelectElement || null} 都道府県を選択するselect要素
+     * @type {HTMLSelectElement | null} 都道府県を選択するselect要素
      */
     const addressControl1 = document.getElementById("prefecure");
     /**
-     * @type {HTMLSelectElement || null} 市区町村を選択するselect要素
+     * @type {HTMLSelectElement | null} 市区町村を選択するselect要素
      */
     const addressControl2 = document.getElementById("city");
 
     /**
-     * @type {Array<HTMLInputElement || HTMLSelectElement || null>}
+     * @type {Array<HTMLInputElement | HTMLSelectElement | null>}
      */
     const controlArray = [
       familyNameControl,
@@ -158,7 +158,7 @@ export const checkForm = () => {
    */
   const toggleButtonClickable = () => {
     /**
-     * @type {HTMLButtonElement || null} フォームの送信ボタン
+     * @type {HTMLButtonElement | null} フォームの送信ボタン
      */
     const submitButton = document.querySelector('[data-form="submit"]');
     if (!submitButton) return;
