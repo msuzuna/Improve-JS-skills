@@ -11,6 +11,62 @@
     <h1>プチ成果物集</h1>
     <section>
       <h2>ToDoリスト</h2>
+      <section>
+        <h3>新規タスクの追加</h3>
+        <label>
+          タスク名
+          <input type="text" data-input="taskname" />
+        </label>
+        <label>
+          期限
+          <input type="date" data-input="deadline" />
+        </label>
+        <button type="button" disabled data-input="addbutton">追加</button>
+      </section>
+      <section>
+        <h3>対応中タスク一覧</h3>
+        <ul data-tasklist="doing">
+          <li>
+            <label>
+              <input type="checkbox" />
+              初期タスク①
+            </label>
+            <span>2023/12/31</span>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h3>対応済みタスク一覧</h3>
+        <ul data-tasklist="done">
+          <li>
+            <label>
+              <input type="checkbox" checked />
+              初期タスク②
+            </label>
+            <span>2023/12/31</span>
+          </li>
+        </ul>
+      </section>
+    </section>
+    <section>
+      <h2>抽選</h2>
+      <p>数字：<span data-lottery="number">抽選前</span></p>
+      <p>結果：<span data-lottery="string">抽選前</span></p>
+      <button type="button" data-lottery="trigger">抽選する</button>
+    </section>
+    <section>
+      <h2>イーブイ育成ゲーム</h2>
+      <dl>遊び方</dl>
+      <dt>始める方法</dt>
+      <dd>イーブイに名前をつけよう</dd>
+      <input type="text" value="イーブイ" data-eievui-input="name" />
+      <button type="button" data-eievui-button="name">名前をつける</button>
+      <dt>進化のさせ方のヒント</dt>
+      <dd>道具を使うと進化するかも？</dd>
+      <dd>
+        ピクニックに行って仲良くなった後にバトルしてレベルアップすると進化するかも？
+      </dd>
+      <div data-eievui-screen="wrapper"></div>
     </section>
     <section>
       <h2>フォーム</h2>
