@@ -1,5 +1,5 @@
-import { test } from "./modules/test.js";
+import { todoList } from "./modules/todoList.js";
 import { lottery } from "./modules/lottery.js";
 
-test();
+todoList();
 lottery();
