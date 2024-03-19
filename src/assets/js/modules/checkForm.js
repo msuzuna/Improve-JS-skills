@@ -120,9 +120,12 @@ export const checkForm = () => {
 
     controlArray.forEach((control) => {
       if (!control) return;
-      const errorMsg = control.nextElementSibling;
+      const { id } = control;
+      const errorMsg = document.querySelector(
+        `[data-error-message-for="${id}"]`
+      );
       if (!errorMsg) return;
-      const { patternMismatchText, typeMismatchText } = getErrorMsg(control.id);
+      const { patternMismatchText, typeMismatchText } = getErrorMsg(id);
       const { minLength, maxLength } = control;
       control.addEventListener("input", () => {
         const {
