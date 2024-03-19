@@ -18,47 +18,49 @@
   margin-top: 8px;
 }
 
-input,
-select {
-  width: 90%;
-}
+form {
+  input,
+  select {
+    width: 90%;
+  }
 
-input + span,
-select + span {
-  color: red;
-}
+  input + span,
+  select + span {
+    color: red;
+  }
 
-input:required + span::before,
-select:required + span::before {
-  position: absolute;
-  top: 0;
-  right: 10%;
-  display: block;
-  padding: 4px 8px;
-  font-size: 12px;
-  color: #fff;
-  content: "必須";
-  background: #333;
-}
+  input:required + span::before,
+  select:required + span::before {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    display: block;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #fff;
+    content: "必須";
+    background: #333;
+  }
 
-input:invalid + span::after,
-select:invalid + span::after {
-  position: absolute;
-  top: 21px;
-  right: calc(10% - 25px);
-  display: block;
-  font-size: 20px;
-  color: red;
-  content: "×";
-}
+  input:invalid + span::after,
+  select:invalid + span::after {
+    position: absolute;
+    top: 21px;
+    right: calc(10% - 25px);
+    display: block;
+    font-size: 20px;
+    color: red;
+    content: "×";
+  }
 
-input:valid + span::after,
-select:valid + span::after {
-  position: absolute;
-  top: 24px;
-  right: calc(10% - 30px);
-  display: block;
-  font-size: 20px;
-  color: green;
-  content: "○";
+  input:valid + span::after,
+  select:valid + span::after {
+    position: absolute;
+    top: 24px;
+    right: calc(10% - 30px);
+    display: block;
+    font-size: 20px;
+    color: green;
+    content: "○";
+  }
 }
