@@ -126,7 +126,7 @@ export const checkForm = () => {
       );
       if (!errorMsg) return;
       const { patternMismatchText, typeMismatchText } = getErrorMsg(id);
-      const { minLength, maxLength } = control;
+      const { minLength, maxLength, value } = control;
       control.addEventListener("input", () => {
         const {
           patternMismatch,
@@ -143,10 +143,8 @@ export const checkForm = () => {
         } else if (valueMissing) {
           errorMsg.textContent = "必須項目です。";
         } else if (tooShort) {
-          const { value } = control;
           errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
         } else if (tooLong) {
-          const { value } = control;
           errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
         } else if (valid) {
           errorMsg.textContent = "";
