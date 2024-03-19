@@ -8,11 +8,7 @@ import { getDisplayText } from "./getDisplayText.js";
  */
 export const toggleButtonActivate = (inputElement, buttonElement) => {
   const wordCount = inputElement.value.length;
-  if (wordCount === 0) {
-    buttonElement.disabled = true;
-  } else {
-    buttonElement.disabled = false;
-  }
+    buttonElement.disabled = !!wordCount;
 };
 
 /**
