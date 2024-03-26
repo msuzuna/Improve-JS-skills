@@ -68,5 +68,148 @@
       </dd>
       <div data-eievui-screen="wrapper"></div>
     </section>
+    <section>
+      <h2>フォーム</h2>
+      <form action="" method="" class="form">
+        <fieldset>
+          <legend>氏名</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="family-name">名字</label>
+              <input
+                type="text"
+                id="family-name"
+                name="family-name"
+                required
+                maxlength="10"
+                pattern="^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*$"
+                data-form="input"
+              />
+              <span data-error-message-for="family-name"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="first-name">名前</label>
+              <input
+                type="text"
+                id="first-name"
+                name="first-name"
+                required
+                maxlength="10"
+                pattern="^[ぁ-んァ-ヶｱ-ﾝﾞﾟ一-龠]*$"
+                data-form="input"
+              />
+              <span data-error-message-for="first-name"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="family-name-kana">ミョウジ（カナ）</label>
+              <input
+                type="text"
+                id="family-name-kana"
+                name="family-name-kana"
+                maxlength="20"
+                pattern="[\u30A1-\u30F6]*"
+                data-form="input"
+              />
+              <span data-error-message-for="family-name-kana"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="first-name-kana">ナマエ（カナ）</label>
+              <input
+                type="text"
+                id="first-name-kana"
+                name="family-name-kana"
+                maxlength="20"
+                pattern="[\u30A1-\u30F6]*"
+                data-form="input"
+              />
+              <span data-error-message-for="first-name-kana"></span>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>連絡先</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="phone">電話番号</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                required
+                minlength="9"
+                maxlength="11"
+                pattern="^[0-9]*$"
+                data-form="input"
+              />
+              <span data-error-message-for="phone"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="mail1">メールアドレス①</label>
+              <input
+                type="email"
+                id="mail1"
+                name="mail1"
+                required
+                minlength="5"
+                data-form="input"
+              />
+              <span data-error-message-for="mail1"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="mail2">メールアドレス②</label>
+              <input
+                type="email"
+                id="mail2"
+                name="mail2"
+                minlength="5"
+                data-form="input"
+              />
+              <span data-error-message-for="mail2"></span>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>住所</legend>
+          <ul class="form__list">
+            <li class="form__listItem">
+              <label for="prefecure">都道府県</label>
+              <select
+                id="prefecure"
+                name="prefecure"
+                required
+                data-form="select"
+              >
+                <option value="" hidden>--選択--</option>
+                <optgroup label="関東">
+                  <option>東京都</option>
+                </optgroup>
+              </select>
+              <span data-error-message-for="prefecure"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="city">市区町村</label>
+              <select type="text" id="city" name="city" data-form="select">
+                <option value="">--選択--</option>
+                <optgroup label="23区">
+                  <option>中央区</option>
+                </optgroup>
+              </select>
+              <span data-error-message-for="city"></span>
+            </li>
+            <li class="form__listItem">
+              <label for="address-number">番地</label>
+              <input
+                type="text"
+                id="address-number"
+                name="address-number"
+                data-form="input"
+              />
+              <span data-error-message-for="address-number"></span>
+            </li>
+          </ul>
+        </fieldset>
+        <button type="button" data-form="submit" disabled>送信</button>
+      </form>
+    </section>
   </body>
 </html>

@@ -1,3 +1,66 @@
 @charset 'utf-8';
 
 @use "./libs/ress.scss";
+
+.form {
+  max-width: 500px;
+}
+
+.form__list {
+  padding: 0 16px;
+}
+
+.form__listItem {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 4px;
+  margin-top: 8px;
+}
+
+form {
+  input,
+  select {
+    width: 90%;
+  }
+
+  input + span,
+  select + span {
+    color: red;
+  }
+
+  input:required + span::before,
+  select:required + span::before {
+    position: absolute;
+    top: 0;
+    right: 10%;
+    display: block;
+    padding: 4px 8px;
+    font-size: 12px;
+    color: #fff;
+    content: "必須";
+    background: #333;
+  }
+
+  input:user-invalid + span::after,
+  select:user-invalid + span::after {
+    position: absolute;
+    top: 21px;
+    right: calc(10% - 25px);
+    display: block;
+    font-size: 20px;
+    color: red;
+    content: "×";
+  }
+
+  input:user-valid + span::after,
+  select:user-valid + span::after {
+    position: absolute;
+    top: 24px;
+    right: calc(10% - 30px);
+    display: block;
+    font-size: 20px;
+    color: green;
+    content: "○";
+  }
+}
