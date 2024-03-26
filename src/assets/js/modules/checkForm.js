@@ -124,10 +124,10 @@ export const checkForm = () => {
     controlArray.forEach((control) => {
       if (!control) return;
       const { id } = control;
-      const errorMsg = document.querySelector(
+      const errorMsgElement = document.querySelector(
         `[data-error-message-for="${id}"]`
       );
-      if (!errorMsg) return;
+      if (!errorMsgElement) return;
       const { patternMismatchText, typeMismatchText, matchErrorText } =
         getErrorMsg(id);
       const { minLength, maxLength } = control;
@@ -143,19 +143,19 @@ export const checkForm = () => {
         } = control.validity;
         const mailMatchError = id === "mail2" && value === mailControl1.value;
         if (patternMismatch) {
-          errorMsg.textContent = patternMismatchText;
+          errorMsgElement.textContent = patternMismatchText;
         } else if (typeMismatch) {
-          errorMsg.textContent = typeMismatchText;
+          errorMsgElement.textContent = typeMismatchText;
         } else if (valueMissing) {
-          errorMsg.textContent = "必須項目です。";
+          errorMsgElement.textContent = "必須項目です。";
         } else if (tooShort) {
-          errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
+          errorMsgElement.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
         } else if (tooLong) {
-          errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
+          errorMsgElement.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
         } else if (mailMatchError) {
-          errorMsg.textContent = matchErrorText;
+          errorMsgElement.textContent = matchErrorText;
         } else if (valid) {
-          errorMsg.textContent = "";
+          errorMsgElement.textContent = "";
         }
       });
     });
