@@ -206,11 +206,7 @@ export const checkForm = () => {
      */
     const toggleButtonClickable = (formControls, submitButton) => {
       const isAllEntered = checkAllEntered(formControls);
-      if (isAllEntered) {
-        submitButton.disabled = false;
-      } else {
-        submitButton.disabled = true;
-      }
+      submitButton.disabled = !isAllEntered;
     };
 
     formControls.forEach((control) => {
