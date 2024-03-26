@@ -107,9 +107,12 @@ export const checkForm = () => {
           const patternMismatchText =
             "半角英数字または記号で入力してください。";
           const typeMismatchText = "メールアドレスの形式で入力してください";
+          const matchErrorText =
+            "メールアドレス②はメールアドレス①と異なるメールアドレスを入力ください。";
           return {
             patternMismatchText,
             typeMismatchText,
+            matchErrorText,
           };
         }
         default: {
@@ -125,9 +128,11 @@ export const checkForm = () => {
         `[data-error-message-for="${id}"]`
       );
       if (!errorMsg) return;
-      const { patternMismatchText, typeMismatchText } = getErrorMsg(id);
-      const { minLength, maxLength, value } = control;
+      const { patternMismatchText, typeMismatchText, matchErrorText } =
+        getErrorMsg(id);
+      const { minLength, maxLength } = control;
       control.addEventListener("input", () => {
+        const { value } = control;
         const {
           patternMismatch,
           typeMismatch,
@@ -136,6 +141,7 @@ export const checkForm = () => {
           tooLong,
           valid,
         } = control.validity;
+        const mailMatchError = id === "mail2" && value === mailControl1.value;
         if (patternMismatch) {
           errorMsg.textContent = patternMismatchText;
         } else if (typeMismatch) {
@@ -146,6 +152,8 @@ export const checkForm = () => {
           errorMsg.textContent = `${minLength}文字以上でご記入ください。現在${value.length}文字です。`;
         } else if (tooLong) {
           errorMsg.textContent = `${maxLength}文字内でご記入ください。現在${value.length}文字です。`;
+        } else if (mailMatchError) {
+          errorMsg.textContent = matchErrorText;
         } else if (valid) {
           errorMsg.textContent = "";
         }
