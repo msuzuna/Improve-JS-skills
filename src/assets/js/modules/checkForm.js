@@ -165,7 +165,7 @@ export const checkForm = () => {
    * 送信ボタンの活性非活性を切り替える関数
    * @returns {void}
    */
-  const toggleButtonClickable = () => {
+  const toggleButtonClickableFunction = () => {
     /**
      * @type {HTMLButtonElement | null} フォームの送信ボタン
      */
@@ -222,5 +222,5 @@ export const checkForm = () => {
   };
 
   checkValidation();
-  toggleButtonClickable();
+  toggleButtonClickableFunction();
 };
