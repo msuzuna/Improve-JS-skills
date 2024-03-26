@@ -44,7 +44,7 @@ export const checkForm = () => {
     /**
      * @type {Array<HTMLInputElement | HTMLSelectElement | null>}
      */
-    const controlArray = [
+    const formControlArray = [
       familyNameControl,
       firstNameControl,
       familyKanaControl,
@@ -121,7 +121,7 @@ export const checkForm = () => {
       }
     };
 
-    controlArray.forEach((control) => {
+    formControlArray.forEach((control) => {
       if (!control) return;
       const { id } = control;
       const errorMsgElement = document.querySelector(
